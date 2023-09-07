@@ -1,9 +1,10 @@
 src
 ├── /assets
+├── /state
 ├── /components
+├── /styles
 ├── /commons
 ├── /hooks
-├── /contexts
 ├── /utils
 └── App.jsx
 └── main.jsx
