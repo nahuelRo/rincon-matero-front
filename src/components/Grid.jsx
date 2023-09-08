@@ -1,11 +1,14 @@
 import Card from "../commons/Card";
 import fakeData from "../utils/fakeData";
+import { Link } from "react-router-dom";
 
 const Grid = () => {
   return (
     <section className="grid">
       {fakeData?.map((el, index) => (
-        <Card key={index} data={el} />
+        <Link to={"/productDetails/1"}>
+          <Card key={index} data={el} />
+        </Link>
       ))}
     </section>
   );

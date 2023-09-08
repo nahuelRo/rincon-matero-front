@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 //y cuando se conecte seria sin la prop de product
 const ProductDetails = ({ product }) => {
@@ -18,6 +19,9 @@ const ProductDetails = ({ product }) => {
   return (
     <>
       <div className="product-details">
+        <Link to={"/"}>
+          <div className="button-return">VOLVER</div>
+        </Link>
         <div className="product-image-container">
           <img
             src={product.image}

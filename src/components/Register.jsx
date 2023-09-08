@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import useInput from "../hooks/useInput";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const name = useInput();
@@ -9,6 +10,7 @@ const Register = () => {
   const address = useInput();
   const password = useInput();
   const registerRef = useRef();
+  const navigate = useNavigate();
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const Register = () => {
 
   const handlerClick = () => {
     registerRef.current.classList.add("register--active");
+    navigate("/");
   };
 
   return (
