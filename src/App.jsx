@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import NavbarComponent from "./components/Navbar";
 import Grid from "./components/Grid";
 import { Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
 
 function App() {
   const product = fakeData[0];
@@ -29,6 +30,12 @@ function App() {
           element={<ProductDetails product={product} />}
         />
       </Routes>
+      <NavbarComponent />
+      <h1>Rincon Matero</h1>
+      <ProductDetails product={product} />
+      <Register />
+      <Login />
+      <Grid />
     </>
   );
 }
