@@ -1,7 +1,4 @@
-@import "../styles.scss";
-
 //////////LOGO
-
 .logo-img {
   width: 300px;
   margin-left: 900px; //MODIFICAR ESTO
@@ -9,8 +6,8 @@
 
 //////////BOTONES
 
-.login,
-.register {
+.buttonlogin-navbar,
+.buttonRegister-navbar {
   background-color: transparent;
   border: none;
   color: $text-color;
@@ -18,18 +15,11 @@
   font-size: 16px;
   padding: 5px 10px;
   transition: background-color 0.3s ease;
-  font-family: "Kanit", sans-serif;
 
   &:hover {
     background-color: $secondary-color;
     color: $text-color;
   }
-}
-
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-right: 150px;
 }
 
 //////////NAVBAR HEADER
@@ -66,7 +56,6 @@
   font-size: 16px;
   padding: 5px 10px;
   transition: background-color 0.3s ease;
-  font-family: "Kanit", sans-serif;
 
   &:hover {
     background-color: $secondary-color;
