@@ -1,6 +1,4 @@
 import React from "react";
-import "../styles/components/Navbar.scss";
-import "font-awesome/css/font-awesome.min.css";
 import logoRinconMatero from "../assets/logo rincon matero.png";
 
 const NavbarComponent = () => {
@@ -15,8 +13,8 @@ const NavbarComponent = () => {
           />
         </div>
         <div className="buttons">
-          <button className="login">INICIAR SESIÓN</button>
-          <button className="register">REGISTRATE</button>
+          <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
+          <button className="buttonRegister-navbar">REGISTRATE</button>
         </div>
       </div>
 
