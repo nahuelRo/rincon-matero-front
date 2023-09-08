@@ -1,6 +1,5 @@
 import React from "react";
 import logoRinconMatero from "../assets/logo rincon matero.png";
-import { Link } from "react-router-dom";
 
 const NavbarComponent = () => {
   return (
@@ -15,16 +14,14 @@ const NavbarComponent = () => {
         </div>
         <div className="buttons">
           <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
-          <Link to={"/register"}>
-            <button className="buttonRegister-navbar">REGISTRATE</button>
-          </Link>
+          <button className="buttonRegister-navbar">REGISTRATE</button>
         </div>
       </div>
 
       <nav className="navbar">
         <div className="center">
           <button className="nav-button">INICIO</button>
-          <button className="nav-button">CATEGORIAS</button>
+          <button className="nav-button">PRODUCTOS</button>
         </div>
 
         <div className="left">
