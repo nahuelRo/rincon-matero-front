@@ -18,6 +18,22 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  .button-return {
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    color: $text-color;
+    cursor: pointer;
+
+    padding: 10px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: $text-color;
+    }
+  }
+
   .product-image-container {
     flex: 1;
     display: flex;

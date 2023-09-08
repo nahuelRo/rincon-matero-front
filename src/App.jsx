@@ -5,6 +5,7 @@ import fakeData from "./utils/fakeData";
 import Register from "./components/Register";
 import NavbarComponent from "./components/Navbar";
 import Grid from "./components/Grid";
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 
 function App() {
@@ -12,6 +13,23 @@ function App() {
 
   return (
     <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavbarComponent />
+              <Grid />
+            </>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/productDetails/1"
+          element={<ProductDetails product={product} />}
+        />
+      </Routes>
       <NavbarComponent />
       <h1>Rincon Matero</h1>
       <ProductDetails product={product} />
