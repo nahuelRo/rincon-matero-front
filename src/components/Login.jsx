@@ -20,22 +20,13 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //USERS
-    axios
-      .post("http://localhost:3001/api/users/login", { email, password })
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            name: res.data.name,
-            id: res.data.id,
-            email: res.data.email,
-            lastname: res.data.lastname,
-          })
-        );
-      })
-      .then(() => navigate("/"))
-      .catch(() => alert("Usuario no existe"));
+    axios.post(
+      "http://localhost:3001/api/auth/login",
+      { email, password },
+      { withCredentials: true }
+    );
+
+    loginRef.current.classList.add("login--active");
     navigate("/");
   };
 
