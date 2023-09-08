@@ -24,9 +24,10 @@
     border: none;
     color: $text-color;
     cursor: pointer;
-
+    border: solid 1px $primary-color;
     padding: 10px;
     transition: background-color 0.3s ease;
+    border-radius: 5px;
 
     &:hover {
       background-color: $secondary-color;
@@ -85,6 +86,8 @@
       font-size: 16px;
       padding: 10px;
       transition: background-color 0.3s ease;
+      border: solid 1px $text-color;
+      border-radius: 5px;
 
       &:hover {
         background-color: $secondary-color;

@@ -52,10 +52,12 @@ const Login = () => {
           className="login__form"
         >
           <div className="login__header">
-            <h2 className="login__title">Login</h2>
-            <p className="login__exit" onClick={handlerClick}>
-              X
-            </p>
+            <h2 className="login__title">Inicia Sesión</h2>
+            <Link to={"/"}>
+              <p className="login__exit" onClick={handlerClick}>
+                X
+              </p>
+            </Link>
           </div>
           <div className="login__container">
             <div className="login__email">
@@ -68,12 +70,9 @@ const Login = () => {
                 onChange={handdleEmail}
                 value={email}
               />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
             </div>
             <div className="login__password">
-              <label className="form-label">Password</label>
+              <label className="form-label">Contraseña</label>
               <input
                 placeholder="********"
                 type="password"
@@ -86,11 +85,11 @@ const Login = () => {
           </div>
           <div className="mb-3">
             <Link to="/register">
-              <label className="form-check-label">Register</label>
+              <label className="form-check-label">Registro</label>
             </Link>
           </div>
           <button type="submit" className="login__submit">
-            Submit
+            Enviar
           </button>
         </form>
       </section>

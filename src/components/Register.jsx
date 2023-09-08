@@ -90,7 +90,7 @@ const Register = () => {
 
         <hr className="register__separator" />
         <div className="register__submit">
-          <input type="submit" value="CREAR CUENTA" />
+          <input type="submit" value="CREAR CUENTA" onClick={handlerClick} />
         </div>
       </form>
     </section>
