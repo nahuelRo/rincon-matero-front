@@ -1,8 +1,11 @@
 import React from "react";
 import logoRinconMatero from "../assets/logo rincon matero.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavbarComponent = () => {
+  const user = useSelector((state) => state.user);
+
   return (
     <>
       <div className="nav-header">
@@ -13,13 +16,20 @@ const NavbarComponent = () => {
             className="logo-img"
           />
         </div>
+
         <div className="buttons">
-          <Link to={"/login"}>
-            <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
-          </Link>
-          <Link to={"/register"}>
-            <button className="buttonRegister-navbar">REGISTRATE</button>
-          </Link>
+          {user ? (
+            <p>Bienvenido {user.name}</p>
+          ) : (
+            <>
+              <Link to="login">
+                <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
+              </Link>
+              <Link to={"/register"}>
+                <button className="buttonRegister-navbar">REGISTRATE</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 

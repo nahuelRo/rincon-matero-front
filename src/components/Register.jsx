@@ -26,6 +26,8 @@ const Register = () => {
       },
       { withCredentials: true }
     );
+    registerRef.current.classList.add("register--active");
+    navigate("/");
   };
 
   const handlerClick = () => {
@@ -90,7 +92,7 @@ const Register = () => {
 
         <hr className="register__separator" />
         <div className="register__submit">
-          <input type="submit" value="CREAR CUENTA" onClick={handlerClick} />
+          <input type="submit" value="CREAR CUENTA" />
         </div>
       </form>
     </section>
