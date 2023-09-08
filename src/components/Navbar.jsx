@@ -16,20 +16,14 @@ const NavbarComponent = () => {
             className="logo-img"
           />
         </div>
-
+        {user.name ? <p>Bienvenido {user.name}</p> : ""}
         <div className="buttons">
-          {user ? (
-            <p>Bienvenido {user.name}</p>
-          ) : (
-            <>
-              <Link to="login">
-                <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
-              </Link>
-              <Link to={"/register"}>
-                <button className="buttonRegister-navbar">REGISTRATE</button>
-              </Link>
-            </>
-          )}
+          <Link to="login">
+            <button className="buttonlogin-navbar">INICIAR SESIÓN</button>
+          </Link>
+          <Link to={"/register"}>
+            <button className="buttonRegister-navbar">REGISTRATE</button>
+          </Link>
         </div>
       </div>
 
