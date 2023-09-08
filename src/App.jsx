@@ -30,12 +30,6 @@ function App() {
           element={<ProductDetails product={product} />}
         />
       </Routes>
-      <NavbarComponent />
-      <h1>Rincon Matero</h1>
-      <ProductDetails product={product} />
-      <Register />
-      <Login />
-      <Grid />
     </>
   );
 }
