@@ -1,14 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import ProductDetails from "./components/Product_details";
-import "./styles/styles.scss";
+import ProductDetails from "./components/Product_details/Product_details";
 import fakeData from "./utils/fakeData";
-import Register from "./components/Register";
-import NavbarComponent from "./components/Navbar";
-import Grid from "./components/Grid";
+import Register from "./components/Register/Register";
+import NavbarComponent from "./components/Navbar/Navbar";
+import Grid from "./components/Grid/Grid";
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/userReducer";
 

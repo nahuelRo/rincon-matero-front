@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import styles from "./login.module.scss";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -36,50 +37,50 @@ const Login = () => {
 
   return (
     <>
-      <section ref={loginRef} className="login">
+      <section ref={loginRef} className={styles.login}>
         <form
           onSubmit={handleSubmit}
           autoComplete="off"
-          className="login__form"
+          className={styles["login__form"]}
         >
-          <div className="login__header">
-            <h2 className="login__title">Inicia Sesión</h2>
+          <div className={styles["login__header"]}>
+            <h2 className={styles["login__title"]}>Inicia Sesión</h2>
             <Link to={"/"}>
-              <p className="login__exit" onClick={handlerClick}>
+              <p className={styles["login__exit"]} onClick={handlerClick}>
                 X
               </p>
             </Link>
           </div>
-          <div className="login__container">
-            <div className="login__email">
-              <label className="form-label">Email</label>
+          <div className={styles["login__container"]}>
+            <div className={styles["login__email"]}>
+              <label className={styles["form-label"]}>Email</label>
               <input
                 placeholder="email@mail.com"
                 type="text"
-                className="form-control"
+                className={styles["form-control"]}
                 id="staticEmail2"
                 onChange={handdleEmail}
                 value={email}
               />
             </div>
-            <div className="login__password">
+            <div className={styles["login__password"]}>
               <label className="form-label">Contraseña</label>
               <input
                 placeholder="********"
                 type="password"
-                className="form-control"
+                className={styles["form-control"]}
                 id="inputPassword2"
                 onChange={handdlePassword}
                 value={password}
               />
             </div>
           </div>
-          <div className="mb-3">
+          <div className={styles["mb-3"]}>
             <Link to="/register">
-              <label className="form-check-label">Registro</label>
+              <label className={styles["form-check-label"]}>Registro</label>
             </Link>
           </div>
-          <button type="submit" className="login__submit">
+          <button type="submit" className={styles["login__submit"]}>
             Enviar
           </button>
         </form>
