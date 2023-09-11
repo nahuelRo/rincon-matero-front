@@ -1,0 +1,38 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+@use "../../styles/reset" as *;
+
+.field {
+  height: 90px;
+}
+
+.wrapper {
+  width: 100%;
+
+  label {
+    text-transform: capitalize;
+    font-size: 12px;
+    width: 5px;
+  }
+
+  &__input {
+    width: 100%;
+    font-size: $font-size-sm;
+    padding: 0.8rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba($color: $text-color, $alpha: 0.3);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+span {
+  color: tomato;
+  font-size: 14px;
+}
+
+.error {
+  border: 1px solid tomato;
+}

@@ -1,3 +1,7 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+@use "../../styles/reset" as *;
+
 .product-details {
   display: flex;
   height: 95vh;
