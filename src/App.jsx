@@ -13,7 +13,6 @@ import { setUser } from "./state/userReducer";
 
 function App() {
   const product = fakeData[0];
-  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .post("http://localhost:3001/api/auth/me", null, {

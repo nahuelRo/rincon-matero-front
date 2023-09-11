@@ -3,12 +3,15 @@ import axios from "axios";
 import styles from "./login.module.scss";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../state/userReducer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const loginRef = useRef();
+  const dispatch = useDispatch();
 
   const handdleEmail = (e) => {
     setEmail(e.target.value);
@@ -21,11 +24,13 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //USERS
-    axios.post(
-      "http://localhost:3001/api/auth/login",
-      { email, password },
-      { withCredentials: true }
-    );
+    axios
+      .post(
+        "http://localhost:3001/api/auth/login",
+        { email, password },
+        { withCredentials: true }
+      )
+      .then((res) => dispatch(setUser(res.data)));
 
     loginRef.current.classList.add("login--active");
     navigate("/");
