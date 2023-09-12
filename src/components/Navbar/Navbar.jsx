@@ -1,11 +1,15 @@
-import React from "react";
 import styles from "./navbar.module.scss";
 import logoRinconMatero from "../../assets/logo rincon matero.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NavbarComponent = () => {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/shoppingCart");
+  };
 
   return (
     <>
@@ -19,7 +23,7 @@ const NavbarComponent = () => {
         </div>
         {user.name ? <p>Bienvenido {user.name}</p> : ""}
         <div className={styles["buttons"]}>
-          <Link to="login">
+          <Link to="/login">
             <button className={styles["buttonlogin-navbar"]}>
               INICIAR SESIÓN
             </button>
@@ -34,12 +38,14 @@ const NavbarComponent = () => {
 
       <nav className={styles["navbar"]}>
         <div className={styles["center"]}>
-          <button className={styles["nav-button"]}>INICIO</button>
+          <Link to="/">
+            <button className={styles["nav-button"]}>INICIO</button>
+          </Link>
           <button className={styles["nav-button"]}>PRODUCTOS</button>
         </div>
 
         <div className={styles["left"]}>
-          <i className={styles["fa-solid fa-cart-shopping"]}></i>
+          <i className="fa-solid fa-cart-shopping" onClick={handleClick}></i>
         </div>
       </nav>
     </>
