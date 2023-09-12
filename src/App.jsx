@@ -14,6 +14,7 @@ import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
 
 function App() {
+  const dispatch = useDispatch();
   const product = fakeData[0];
   useEffect(() => {
     axios
@@ -41,7 +42,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route
-          path="/productDetails/1"
+          path="/product/:id"
           element={<ProductDetails product={product} />}
         />
         <Route
@@ -50,7 +51,6 @@ function App() {
             <>
               <NavbarComponent />
               <ShoppingCart />
-              <Grid />
             </>
           }
         />
