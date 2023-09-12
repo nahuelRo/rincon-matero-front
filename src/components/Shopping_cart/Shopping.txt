@@ -1,0 +1,22 @@
+<div className={styles.summary}>
+        <h2>Resumen de Compra</h2>
+        <div className={styles.summaryItem}>
+          Productos ({fakeDataII.length}):
+          <span className={styles.summaryPrice}>
+            {/* Calcula el precio total de los productos */}$
+            {fakeDataII
+              .reduce((total, item) => total + item.price, 0)
+              .toFixed(2)}
+          </span>
+        </div>
+        <div className={styles.summaryTotal}>
+          Total:
+          <span className={styles.summaryPrice}>
+            {/* Calcula el precio total de todos los productos */}$
+            {fakeDataII
+              .reduce((total, item) => total + item.price, 0)
+              .toFixed(2)}
+          </span>
+        </div>
+        <button>CHECKOUT</button>
+      </div>

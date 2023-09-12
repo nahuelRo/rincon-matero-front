@@ -10,6 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/userReducer";
+import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 
 function App() {
   const product = fakeData[0];
@@ -41,6 +42,16 @@ function App() {
         <Route
           path="/productDetails/1"
           element={<ProductDetails product={product} />}
+        />
+        <Route
+          path="/shoppingCart"
+          element={
+            <>
+              <NavbarComponent />
+              <ShoppingCart />
+              <Grid />
+            </>
+          }
         />
       </Routes>
     </>
