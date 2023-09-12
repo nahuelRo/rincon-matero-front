@@ -1,15 +1,17 @@
-import React from "react";
 import ProductCard from "../../commons/Card_Product_Cart/Card_product_cart";
-import fakeDataII from "../../utils/fakeDataII";
 import styles from "./Shopping_cart.module.scss";
+import { useSelector } from "react-redux";
 
-const ShoppingCart = ({ cartItems }) => {
+const ShoppingCart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.scrollContainer}>
-        {fakeDataII.map((product, index) => (
+        {cart.map((product, index) => (
           <div key={index}>
             <ProductCard
+              id={product.id}
               imageUrl={product.image}
               title={product.name}
               description={product.description}
@@ -23,19 +25,15 @@ const ShoppingCart = ({ cartItems }) => {
       <div className={styles.summary}>
         <h2 className={styles.summaryHeadline}>Resumen de Compra</h2>
         <div className={styles.summaryItem}>
-          Productos ({fakeDataII.length}):
+          Productos ({cart.length}):
           <span className={styles.summaryPrice}>
-            {fakeDataII
-              .reduce((total, item) => total + item.price, 0)
-              .toFixed(2)}
+            {cart.reduce((total, item) => total + item.price, 0).toFixed(2)}
           </span>
         </div>
         <div className={styles.summaryTotal}>
           Total:
           <span className={styles.summaryPrice}>
-            {fakeDataII
-              .reduce((total, item) => total + item.price, 0)
-              .toFixed(2)}
+            {cart.reduce((total, item) => total + item.price, 0).toFixed(2)}
           </span>
         </div>
         <button className={styles.buttonCheckout}>CHECKOUT</button>

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./card_product_cart.scss";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../state/cartReducer";
 
-const ProductCard = ({ imageUrl, title, description, price, stock }) => {
-  const [quantity, setQuantity] = useState(0);
+const ProductCard = ({ id, imageUrl, title, description, price, stock }) => {
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(removeFromCart(id));
+  };
 
   const decrementQuantity = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -32,7 +39,7 @@ const ProductCard = ({ imageUrl, title, description, price, stock }) => {
         </div>
         <p className="product-stock">Stock {stock} u.</p>
       </div>
-      <i class="fa-solid fa-trash"></i>
+      <i className="fa-solid fa-trash" onClick={handleClick}></i>
     </div>
   );
 };
