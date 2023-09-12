@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/userReducer";
 import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
+import Carrousel from "./components/Carrousel/Carrousel";
 
 function App() {
   const product = fakeData[0];
@@ -30,6 +31,7 @@ function App() {
           element={
             <>
               <NavbarComponent />
+              <Carrousel />
               <Grid />
             </>
           }
