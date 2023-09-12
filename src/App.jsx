@@ -14,13 +14,15 @@ import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
 
 function App() {
+  const dispatch = useDispatch();
   const product = fakeData[0];
   useEffect(() => {
     axios
       .post("http://localhost:3001/api/auth/me", null, {
         withCredentials: true,
       })
-      .then((res) => dispatch(setUser(res.data)));
+      .then((res) => dispatch(setUser(res.data)))
+      .catch(() => {});
   }, []);
 
   return (
@@ -41,7 +43,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route
-          path="/productDetails/1"
+          path="/product/:id"
           element={<ProductDetails product={product} />}
         />
         <Route
@@ -50,7 +52,6 @@ function App() {
             <>
               <NavbarComponent />
               <ShoppingCart />
-              <Grid />
             </>
           }
         />

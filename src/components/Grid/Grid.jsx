@@ -1,13 +1,25 @@
 import styles from "./grid.module.scss";
 import Card from "../../commons/Card/Card";
-import fakeData from "../../utils/fakeData";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Grid = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/products")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className={styles.grid}>
-      {fakeData?.map((el, index) => (
-        <Link key={index} to={"/productDetails/1"}>
+      {products?.map((el, index) => (
+        <Link key={index} to={`/product/${el.id}`}>
           <Card data={el} />
         </Link>
       ))}
