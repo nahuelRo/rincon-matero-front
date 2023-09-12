@@ -8,9 +8,12 @@ const Grid = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/products").then((res) => {
-      setProducts(res.data);
-    });
+    axios
+      .get("http://localhost:3001/api/products")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch(() => {});
   }, []);
 
   return (

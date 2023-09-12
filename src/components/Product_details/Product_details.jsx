@@ -14,7 +14,7 @@ const ProductDetails = () => {
         setOneProduct(res.data);
       })
       .catch(() => {});
-  }, []);
+  }, [id]);
 
   const handleClick = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -22,6 +22,8 @@ const ProductDetails = () => {
     if (cart.some((item) => item.id === oneProduct.id)) {
       return cart;
     }
+
+    oneProduct.quantity = 1;
 
     localStorage.setItem("cart", JSON.stringify([...cart, oneProduct]));
   };

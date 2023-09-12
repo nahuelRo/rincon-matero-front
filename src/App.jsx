@@ -21,7 +21,8 @@ function App() {
       .post("http://localhost:3001/api/auth/me", null, {
         withCredentials: true,
       })
-      .then((res) => dispatch(setUser(res.data)));
+      .then((res) => dispatch(setUser(res.data)))
+      .catch(() => {});
   }, []);
 
   return (
