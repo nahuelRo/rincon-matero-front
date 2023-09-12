@@ -1,9 +1,12 @@
 import ProductCard from "../../commons/Card_Product_Cart/Card_product_cart";
 import styles from "./Shopping_cart.module.scss";
-import { useSelector } from "react-redux";
+import fakeData from "../../utils/fakeDataII";
+import { useState } from "react";
 
 const ShoppingCart = () => {
-  const cart = useSelector((state) => state.cart);
+  const [cart, setCart] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -11,6 +14,8 @@ const ShoppingCart = () => {
         {cart.map((product, index) => (
           <div key={index}>
             <ProductCard
+              cart={cart}
+              setCart={setCart}
               id={product.id}
               imageUrl={product.image}
               title={product.name}
@@ -24,16 +29,11 @@ const ShoppingCart = () => {
 
       <div className={styles.summary}>
         <h2 className={styles.summaryHeadline}>Resumen de Compra</h2>
-        <div className={styles.summaryItem}>
-          Productos ({cart.length}):
-          <span className={styles.summaryPrice}>
-            {cart.reduce((total, item) => total + item.price, 0).toFixed(2)}
-          </span>
-        </div>
+        <div className={styles.summaryItem}>Productos ({fakeData.length}):</div>
         <div className={styles.summaryTotal}>
           Total:
           <span className={styles.summaryPrice}>
-            {cart.reduce((total, item) => total + item.price, 0).toFixed(2)}
+            {fakeData.reduce((total, item) => total + item.price, 0).toFixed(2)}
           </span>
         </div>
         <button className={styles.buttonCheckout}>CHECKOUT</button>

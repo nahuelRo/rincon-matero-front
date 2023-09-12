@@ -1,14 +1,27 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import styles from "./card_product_cart.scss";
-import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../state/cartReducer";
 
-const ProductCard = ({ id, imageUrl, title, description, price, stock }) => {
+const ProductCard = ({
+  id,
+  imageUrl,
+  title,
+  description,
+  price,
+  stock,
+  setCart,
+  cart,
+}) => {
   const [quantity, setQuantity] = useState(1);
-  const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(removeFromCart(id));
+    setCart(() => {
+      cart = cart.filter((item) => item.id !== id);
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      return cart;
+    });
   };
 
   const decrementQuantity = () => {

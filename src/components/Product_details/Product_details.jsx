@@ -2,11 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./product_details.module.scss";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../state/cartReducer";
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
   const [oneProduct, setOneProduct] = useState({});
   const { id } = useParams();
 
@@ -20,7 +17,13 @@ const ProductDetails = () => {
   }, []);
 
   const handleClick = () => {
-    dispatch(addToCart(oneProduct));
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.some((item) => item.id === oneProduct.id)) {
+      return cart;
+    }
+
+    localStorage.setItem("cart", JSON.stringify([...cart, oneProduct]));
   };
 
   return (
