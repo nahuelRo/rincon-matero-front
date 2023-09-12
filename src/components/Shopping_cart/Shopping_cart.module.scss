@@ -1,0 +1,54 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+@use "../../styles/reset" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 10px 10px 10px 10px;
+  background-color: $background-secondary-color;
+}
+
+.summaryHeadline {
+  font-size: 30px;
+  border-bottom: 2px solid $background-secondary-color;
+}
+
+.summary {
+  text-align: left;
+  margin-top: 20px;
+  padding: 30px;
+  background-color: $tertiary-color;
+  border-radius: 10px;
+  position: sticky;
+  top: 30px;
+}
+
+.summaryItem {
+  margin-bottom: 5px;
+}
+
+.summaryPrice {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.summaryTotal {
+  font-size: 1.2em;
+}
+
+.buttonCheckout {
+  background-color: transparent;
+  padding: 10px 30px 10px 30px;
+  border-radius: 10px;
+  width: 100%;
+  border: solid 1px $secondary-color;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $tertiary-color;
+  }
+}

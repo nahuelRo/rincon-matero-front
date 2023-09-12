@@ -1,0 +1,96 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+@use "../../styles/reset" as *;
+
+.horizontal-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 16px;
+  padding: 16px;
+
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  background-color: white;
+
+  .fa-trash {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: $secondary-color;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #cc0000;
+    }
+  }
+}
+
+.product-image {
+  width: 150px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.product-content {
+  flex: 1;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.product-description {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: $secondary-color;
+}
+
+.product-stock {
+  font-size: 15px;
+  color: #777;
+  margin: 8px 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+
+  button {
+    background-color: transparent;
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 0 5px;
+    outline: none;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+
+  input {
+    border: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    text-align: center;
+    width: 50px;
+    outline: none;
+  }
+}
