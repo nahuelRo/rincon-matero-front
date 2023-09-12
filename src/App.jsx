@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./state/userReducer";
 import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
+import PurchaseInfo from "./components/Purchase_info/Purchase_info";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
               <NavbarComponent />
               <Carrousel />
               <Grid />
+              <PurchaseInfo />
             </>
           }
         />
