@@ -1,12 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styles from "./product_details.module.scss";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../state/cartReducer";
 
-//y cuando se conecte seria sin la prop de product
-const ProductDetails = ({ product }) => {
-  const [oneProduct, setOneProduct] = useState({}); //usaria oneProduct.name o oneProduct.description etc.
-  const id = 1; //use params para conectar a la base de datos
+const ProductDetails = () => {
+  const dispatch = useDispatch();
+  const [oneProduct, setOneProduct] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
     axios
@@ -17,6 +19,10 @@ const ProductDetails = ({ product }) => {
       .catch(() => {});
   }, []);
 
+  const handleClick = () => {
+    dispatch(addToCart(oneProduct));
+  };
+
   return (
     <>
       <div className={styles["product-details"]}>
@@ -25,20 +31,25 @@ const ProductDetails = ({ product }) => {
         </Link>
         <div className={styles["product-image-container"]}>
           <img
-            src={product.image}
-            alt={product.name}
+            src={oneProduct.image}
+            alt={oneProduct.name}
             className={styles["product-image"]}
           />
         </div>
         <div className={styles["product-info"]}>
-          <h1 className={styles["product-title"]}>{product.name}</h1>
-          <p className={styles["product-description"]}>{product.description}</p>
-          <div className={styles["product-price"]}>${product.price}</div>
+          <h1 className={styles["product-title"]}>{oneProduct.name}</h1>
+          <p className={styles["product-description"]}>
+            {oneProduct.description}
+          </p>
+          <div className={styles["product-price"]}>${oneProduct.price}</div>
           <div className={styles["product-stock"]}>
-            Cantidad de unidades disponibles: {product.stock}
+            Cantidad de unidades disponibles: {oneProduct.stock}
           </div>
           <div>
-            <button className={styles["add-to-cart-button"]}>
+            <button
+              className={styles["add-to-cart-button"]}
+              onClick={handleClick}
+            >
               AÑADIR AL CARRITO
             </button>
           </div>
