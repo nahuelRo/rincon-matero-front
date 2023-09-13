@@ -19,7 +19,11 @@ const Grid = () => {
   return (
     <section className={styles.grid}>
       {products?.map((el, index) => (
-        <Link key={index} to={`/product/${el.id}`}>
+        <Link
+          key={index}
+          to={`/product/${el.id}`}
+          className={styles.noDecoration}
+        >
           <Card data={el} />
         </Link>
       ))}

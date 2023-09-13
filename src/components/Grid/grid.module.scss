@@ -6,8 +6,11 @@
   margin: 0 auto;
   margin-top: 20px;
   width: 80%;
-  height: 100vh;
+  height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.noDecoration {
+  text-decoration: none;
 }
