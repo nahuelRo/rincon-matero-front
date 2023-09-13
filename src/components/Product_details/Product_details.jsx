@@ -31,7 +31,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className={styles["product-details"]}>
-        <Link to={"/"}>
+        <Link to={"/"} className={styles.noDecoration}>
           <div className={styles["button-return"]}>VOLVER</div>
         </Link>
         <div className={styles["product-image-container"]}>

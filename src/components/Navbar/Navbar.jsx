@@ -30,6 +30,7 @@ const NavbarComponent = () => {
   return (
     <>
       <div className={styles["nav-header"]}>
+        <div className={styles["empty"]}></div>
         <div className={styles["logo"]}>
           <img
             src={logoRinconMatero}

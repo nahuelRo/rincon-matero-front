@@ -2,7 +2,7 @@
 @use "../../styles/fonts" as *;
 @use "../../styles/reset" as *;
 
-.login {
+.container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -14,86 +14,69 @@
   display: flex;
   justify-content: center;
 
-  &--active {
+  &_active {
     display: none;
   }
+}
 
-  &__form {
-    margin-top: 3rem;
-    width: 600px;
-    max-height: 600px;
-    display: flex;
-    flex-direction: column;
-    background-color: $tertiary-color;
-  }
+.form {
+  margin-top: 3rem;
+  width: 600px;
+  max-height: 465px;
+  display: flex;
+  flex-direction: column;
+  background-color: $tertiary-color;
+}
 
-  &__header {
-    padding: 40px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.header {
+  margin-top: 1rem;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &__title {
-    font-weight: 400;
-    font-size: $font-size-base;
+    font-weight: lighter;
+    font-size: $font-size-md;
   }
 
   &__exit {
     cursor: pointer;
   }
-
-  &__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 97%;
-    margin: 0 auto;
-  }
-
-  &__email {
-    padding-top: 1rem;
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  &__password {
-    padding: 1rem 0 2rem 0;
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  &__submit {
-    display: flex;
-    justify-content: end;
-    padding: 1.5rem 0;
-    margin: 0 2rem;
-
-    input {
-      padding: 10px 20px;
-      max-width: 50%;
-      background-color: $text-color;
-      color: $tertiary-color;
-      font-size: $font-size-sm;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  }
 }
 
-label {
-  font-size: 10px;
+.separator {
+  border: 1px solid rgba($color: $text-color, $alpha: 0.1);
 }
 
-input {
+.twofields {
   width: 100%;
-  font-size: $font-size-sm;
-  padding: 0.8rem 0.5rem;
-  border-radius: 5px;
-  border: 1px solid rgba($color: $text-color, $alpha: 0.3);
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto;
+}
 
-  &:focus {
-    outline: none;
-  }
+.fieldsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.text {
+  margin-left: auto;
+  margin-right: 28px;
+}
+
+.submit {
+  margin-left: auto;
+  margin-right: 28px;
+  padding: 10px 80px;
+  max-width: 50%;
+  background-color: $text-color;
+  color: $tertiary-color;
+  font-size: $font-size-sm;
+  font-weight: bold;
+  cursor: pointer;
 }
