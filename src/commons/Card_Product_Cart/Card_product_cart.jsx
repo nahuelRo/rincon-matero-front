@@ -73,7 +73,7 @@ const ProductCard = ({
         </div>
         <p className={styles["product-stock"]}>Stock {stock} u.</p>
       </div>
-      <i className={styles["fa-trash"]} onClick={handleClick}></i>
+      <i className="fa-solid fa-trash" onClick={handleClick}></i>
     </div>
   );
 };

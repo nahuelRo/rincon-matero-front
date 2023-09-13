@@ -7,19 +7,19 @@ import axios from "axios";
 
 const NavbarComponent = () => {
   // const user = useSelector((state) => state.user);
-
-  const userNoparse = localStorage.getItem("user");
-  const user = JSON.parse(userNoparse);
+  const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3001/api/auth/logout");
+      await axios.post("http://localhost:3001/api/auth/logout", null, {
+        withCredentials: true,
+      });
 
       navigate("/");
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      console.error("Error al cerrar sesión", error);
     }
   };
 
@@ -38,7 +38,7 @@ const NavbarComponent = () => {
           />
         </div>
         <div className={styles["buttons"]}>
-          {user ? (
+          {token !== null ? (
             <button
               className={styles["buttonlogin-navbar"]}
               onClick={handleLogout}
