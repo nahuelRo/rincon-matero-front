@@ -2,11 +2,14 @@ import React from "react";
 import styles from "./navbar.module.scss";
 import logoRinconMatero from "../../assets/logo rincon matero.png";
 import { Link, useNavigate } from "react-router-dom";
+import { setUser } from "../../state/userReducer";
 
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 const NavbarComponent = () => {
-  const token = document.cookie.includes("token=");
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -15,6 +18,7 @@ const NavbarComponent = () => {
         withCredentials: true,
       });
 
+      dispatch(setUser(null));
       navigate("/");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
@@ -37,7 +41,7 @@ const NavbarComponent = () => {
           />
         </div>
         <div className={styles["buttons"]}>
-          {token ? (
+          {user ? (
             <button
               className={styles["buttonlogin-navbar"]}
               onClick={handleLogout}
@@ -78,3 +82,77 @@ const NavbarComponent = () => {
 };
 
 export default NavbarComponent;
+
+// const NavbarComponent = () => {
+//   const token = document.cookie.includes("token=");
+//   const navigate = useNavigate();
+
+//   const handleLogout = async () => {
+//     try {
+//       await axios.post("http://localhost:3001/api/auth/logout", null, {
+//         withCredentials: true,
+//       });
+
+//       navigate("/");
+//     } catch (error) {
+//       console.error("Error al cerrar sesión", error);
+//     }
+//   };
+
+//   const handleClick = () => {
+//     navigate("/shoppingCart");
+//   };
+
+//   return (
+//     <>
+//       <div className={styles["nav-header"]}>
+//         <div className={styles["empty"]}></div>
+//         <div className={styles["logo"]}>
+//           <img
+//             src={logoRinconMatero}
+//             alt="logo-rincon-matero"
+//             className={styles["logo-img"]}
+//           />
+//         </div>
+//         <div className={styles["buttons"]}>
+//           {token ? (
+//             <button
+//               className={styles["buttonlogin-navbar"]}
+//               onClick={handleLogout}
+//             >
+//               CERRAR SESIÓN
+//             </button>
+//           ) : (
+//             <>
+//               <Link to="/login">
+//                 <button className={styles["buttonlogin-navbar"]}>
+//                   INICIAR SESIÓN
+//                 </button>
+//               </Link>
+//               <Link to="/register">
+//                 <button className={styles["buttonRegister-navbar"]}>
+//                   REGISTRATE
+//                 </button>
+//               </Link>
+//             </>
+//           )}
+//         </div>
+//       </div>
+
+//       <nav className={styles["navbar"]}>
+//         <div className={styles["center"]}>
+//           <Link to="/">
+//             <button className={styles["nav-button"]}>INICIO</button>
+//           </Link>
+//           <button className={styles["nav-button"]}>PRODUCTOS</button>
+//         </div>
+
+//         <div className={styles["left"]}>
+//           <i className="fa-solid fa-cart-shopping" onClick={handleClick}></i>
+//         </div>
+//       </nav>
+//     </>
+//   );
+// };
+
+// export default NavbarComponent;
