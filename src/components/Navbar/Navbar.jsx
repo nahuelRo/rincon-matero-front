@@ -58,6 +58,9 @@ const NavbarComponent = () => {
               </button>
               <div className={styles["dropdown-content"]}>
                 <button>Ver Perfil</button>
+                <Link to={"/historyDetails/"}>
+                  <button>Mis compras</button>
+                </Link>
                 <button onClick={handleLogout}>Cerrar Sesión</button>
               </div>
             </div>

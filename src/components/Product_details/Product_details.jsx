@@ -31,9 +31,6 @@ const ProductDetails = () => {
   return (
     <>
       <div className={styles["product-details"]}>
-        <Link to={"/"} className={styles.noDecoration}>
-          <div className={styles["button-return"]}>VOLVER</div>
-        </Link>
         <div className={styles["product-image-container"]}>
           <img
             src={oneProduct.image}
@@ -58,6 +55,14 @@ const ProductDetails = () => {
               AÑADIR AL CARRITO
             </button>
           </div>
+        </div>
+        <div className={styles["button-return-container"]}>
+          <Link
+            to={"/"}
+            className={`${styles.noDecoration} ${styles["button-return"]}`}
+          >
+            VOLVER
+          </Link>
         </div>
       </div>
     </>
