@@ -2,24 +2,22 @@ import React from "react";
 import styles from "./navbar.module.scss";
 import logoRinconMatero from "../../assets/logo rincon matero.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import axios from "axios";
 
 const NavbarComponent = () => {
-  // const user = useSelector((state) => state.user);
-
-  const userNoparse = localStorage.getItem("user");
-  const user = JSON.parse(userNoparse);
-
+  const token = document.cookie.includes("token=");
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3001/api/auth/logout");
+      await axios.post("http://localhost:3001/api/auth/logout", null, {
+        withCredentials: true,
+      });
 
       navigate("/");
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      console.error("Error al cerrar sesión", error);
     }
   };
 
@@ -39,7 +37,7 @@ const NavbarComponent = () => {
           />
         </div>
         <div className={styles["buttons"]}>
-          {user ? (
+          {token ? (
             <button
               className={styles["buttonlogin-navbar"]}
               onClick={handleLogout}
@@ -53,7 +51,7 @@ const NavbarComponent = () => {
                   INICIAR SESIÓN
                 </button>
               </Link>
-              <Link to={"/register"}>
+              <Link to="/register">
                 <button className={styles["buttonRegister-navbar"]}>
                   REGISTRATE
                 </button>
