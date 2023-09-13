@@ -13,6 +13,7 @@ import { setUser } from "./state/userReducer";
 import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
 import PurchaseInfo from "./components/Purchase_info/Purchase_info";
+import HistoryDetails from "./components/history_details/History_details";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,7 +47,13 @@ function App() {
 
         <Route
           path="/product/:id"
-          element={<ProductDetails product={product} />}
+          element={
+            <>
+              {" "}
+              <NavbarComponent /> <ProductDetails product={product} />{" "}
+              <PurchaseInfo />{" "}
+            </>
+          }
         />
         <Route
           path="/shoppingCart"
@@ -54,6 +61,16 @@ function App() {
             <>
               <NavbarComponent />
               <ShoppingCart />
+            </>
+          }
+        />
+        <Route
+          path="/historyDetails/:id"
+          element={
+            <>
+              <NavbarComponent />
+              <HistoryDetails />
+              <PurchaseInfo />
             </>
           }
         />
