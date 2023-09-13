@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import { useState } from "react";
-import styles from "./card_product_cart.scss";
+import React, { useState } from "react";
+import styles from "./card_product_cart.module.scss";
 
 const ProductCard = ({
   id,
@@ -59,22 +58,22 @@ const ProductCard = ({
   };
 
   return (
-    <div className={"horizontal-card"}>
-      <img src={imageUrl} className="product-image" alt={title} />
-      <div className="card-content">
-        <h5 className="product-title">{title}</h5>
-        <p className="product-description">{description}</p>
-        <p className="product-price">Precio: ${price}</p>
-        <div className="quantity-controls">
+    <div className={styles["horizontal-card"]}>
+      <img src={imageUrl} className={styles["product-image"]} alt={title} />
+      <div className={styles["card-content"]}>
+        <h5 className={styles["product-title"]}>{title}</h5>
+        <p className={styles["product-description"]}>{description}</p>
+        <p className={styles["product-price"]}>Precio: ${price}</p>
+        <div className={styles["quantity-controls"]}>
           <button onClick={decrementQuantity}>-</button>
           <input type="text" value={quantity} readOnly />
           <button onClick={incrementQuantity} disabled={quantity === stock}>
             +
           </button>
         </div>
-        <p className="product-stock">Stock {stock} u.</p>
+        <p className={styles["product-stock"]}>Stock {stock} u.</p>
       </div>
-      <i className="fa-solid fa-trash" onClick={handleClick}></i>
+      <i className={styles["fa-trash"]} onClick={handleClick}></i>
     </div>
   );
 };

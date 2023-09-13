@@ -12,7 +12,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 600px;
-  background-color: white;
+  background-color: $tertiary-color;
 
   .fa-trash {
     position: absolute;
@@ -52,7 +52,7 @@
 }
 
 .product-price {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 8px 0;
   color: $secondary-color;

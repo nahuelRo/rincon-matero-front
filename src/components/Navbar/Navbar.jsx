@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const NavbarComponent = () => {
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
+
+  const userNoparse = localStorage.getItem("user");
+  const user = JSON.parse(userNoparse);
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
