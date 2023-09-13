@@ -18,7 +18,16 @@ const NavbarComponent = () => {
         withCredentials: true,
       });
 
-      dispatch(setUser(null));
+      dispatch(
+        setUser({
+          address: null,
+          email: null,
+          id: 0,
+          last_name: null,
+          name: null,
+          role: null,
+        })
+      );
       navigate("/");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
@@ -41,7 +50,7 @@ const NavbarComponent = () => {
           />
         </div>
         <div className={styles["buttons"]}>
-          {user ? (
+          {user.name ? (
             <div className={styles["dropdown"]}>
               <button className={styles["buttonlogin-navbar"]}>
                 MI CUENTA
