@@ -42,13 +42,22 @@ const NavbarComponent = () => {
         </div>
         <div className={styles["buttons"]}>
           {user ? (
-            <button
-              className={styles["buttonlogin-navbar"]}
-              onClick={handleLogout}
-            >
-              CERRAR SESIÓN
-            </button>
+            <div className={styles["dropdown"]}>
+              <button className={styles["buttonlogin-navbar"]}>
+                MI CUENTA
+              </button>
+              <div className={styles["dropdown-content"]}>
+                <button>Ver Perfil</button>
+                <button onClick={handleLogout}>Cerrar Sesión</button>
+              </div>
+            </div>
           ) : (
+            // <button
+            //   className={styles["buttonlogin-navbar"]}
+            //   onClick={handleLogout}
+            // >
+            //   CERRAR SESIÓN
+            // </button>
             <>
               <Link to="/login">
                 <button className={styles["buttonlogin-navbar"]}>
