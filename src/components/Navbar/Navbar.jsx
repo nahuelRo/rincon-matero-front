@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./navbar.module.scss";
 import logoRinconMatero from "../../assets/logo rincon matero.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { setUser } from "../../state/userReducer";
 
 import axios from "axios";
@@ -11,6 +11,7 @@ const NavbarComponent = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -85,7 +86,32 @@ const NavbarComponent = () => {
           <Link to="/">
             <button className={styles["nav-button"]}>INICIO</button>
           </Link>
-          <button className={styles["nav-button"]}>PRODUCTOS</button>
+
+          {location.pathname === "/" ? (
+            <a href="#scroll" className={styles["nav-button"]}>
+              PRODUCTOS
+            </a>
+          ) : (
+            <Link to="/">
+              <button className={styles["nav-button"]}>PRODUCTOS</button>
+            </Link>
+          )}
+
+          <Link to="/">
+            <div className={styles["dropdown"]}>
+              <button className={styles["nav-button"]}>
+                OPCIONES DE ADMINISTRADOR
+              </button>
+              <div className={styles["dropdown-content"]}>
+                <Link to="/panel-admin/products">
+                  <button>PRODUCTOS</button>
+                </Link>
+                <Link to="/panel-admin/categories">
+                  <button>CATEGORIAS</button>
+                </Link>
+              </div>
+            </div>
+          </Link>
         </div>
 
         <div className={styles["left"]}>

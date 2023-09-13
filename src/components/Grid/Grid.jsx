@@ -17,7 +17,7 @@ const Grid = () => {
   }, []);
 
   return (
-    <section className={styles.grid}>
+    <section className={styles.grid} id="scroll">
       {products?.map((el, index) => (
         <Link
           key={index}
