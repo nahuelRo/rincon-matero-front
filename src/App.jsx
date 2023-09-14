@@ -18,7 +18,11 @@ import HistoryDetails from "./components/history_details/History_details";
 
 import Dashboard from "./commons/Dashboard/Dashboard";
 import Panel_edit from "./components/Panel_edit/Panel_edit";
+
+import UserProfileView from "./components/User_profile/User_profile_view";
+
 import Panel_create from "./components/Panel_create/Panel_create";
+
 
 
 function App() {
@@ -49,7 +53,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
+        <Route path="/perfil" element={<UserProfileView />} />
+
+
         {/* Dashboard */}
+
         <Route path="/panel-admin/:name" element={<Dashboard />} />
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
         <Route path="/panel-create/:name" element={<Panel_create />} />
