@@ -20,15 +20,20 @@ const Login = () => {
 
   const onSubmit = (data) => {
     //USERS
+    setIsLoading(true);
     axios
       .post(
         "http://localhost:3001/api/auth/login",
         { email: data.email, password: data.password },
         { withCredentials: true }
       )
-      .then((res) => dispatch(setUser(res.data)));
-
-    navigate("/");
+      .then((res) => {
+        setIsLoading(false), dispatch(setUser(res.data));
+        navigate("/");
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleClick = () => {
@@ -86,8 +91,12 @@ const Login = () => {
           ¿Aún no tiene cuenta? <Link to="/register">Crear cuenta</Link>
         </p>
 
-        <button className={styles.submit}>
-          {isLoading ? "Loading" : "Iniciar sesion"}
+        <button className={styles.submit} disabled={isLoading}>
+          {isLoading ? (
+            <span className={styles["loader"]}></span>
+          ) : (
+            "Iniciar sesion"
+          )}
         </button>
       </form>
     </section>
