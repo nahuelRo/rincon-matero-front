@@ -2,8 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./product_details.module.scss";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductDetails = () => {
+  const notify = () =>
+    toast.success("Producto agregado a carrito.", {
+      icon: "👏",
+    });
   const [oneProduct, setOneProduct] = useState({});
   const { id } = useParams();
 
@@ -20,12 +25,14 @@ const ProductDetails = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart.some((item) => item.id === oneProduct.id)) {
+      toast.error("Este producto ya se encuentra en tu carrito.");
       return cart;
     }
 
     oneProduct.quantity = 1;
 
     localStorage.setItem("cart", JSON.stringify([...cart, oneProduct]));
+    notify();
   };
 
   return (
@@ -48,12 +55,19 @@ const ProductDetails = () => {
             Cantidad de unidades disponibles: {oneProduct.stock}
           </div>
           <div>
-            <button
-              className={styles["add-to-cart-button"]}
-              onClick={handleClick}
-            >
-              AÑADIR AL CARRITO
-            </button>
+            {oneProduct.stock === 0 ? (
+              <button className={styles["sin-stock-button"]} disabled={true}>
+                SIN STOCK
+              </button>
+            ) : (
+              <button
+                className={styles["add-to-cart-button"]}
+                onClick={handleClick}
+              >
+                AÑADIR AL CARRITO
+              </button>
+            )}
+            <Toaster position="top-center" reverseOrder={false} />
           </div>
         </div>
         <div className={styles["button-return-container"]}>

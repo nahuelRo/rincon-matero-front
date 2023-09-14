@@ -67,6 +67,7 @@ function App() {
             <>
               <NavbarComponent />
               <ShoppingCart />
+              <PurchaseInfo />
             </>
           }
         />

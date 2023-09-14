@@ -58,7 +58,10 @@ const NavbarComponent = () => {
               </button>
               <div className={styles["dropdown-content"]}>
                 <button>Ver Perfil</button>
-                <Link to={`/historyDetails/${user.id}`}>
+                <Link
+                  to={`/historyDetails/${user.id}`}
+                  className={styles["text-decoration"]}
+                >
                   <button>Mis compras</button>
                 </Link>
                 <button onClick={handleLogout}>Cerrar Sesión</button>
@@ -82,46 +85,43 @@ const NavbarComponent = () => {
       </div>
 
       <nav className={styles["navbar"]}>
-        <div className={styles["center"]}>
+        <Link to="/">
+          <button className={styles["nav-button"]}>INICIO</button>
+        </Link>
+
+        {location.pathname === "/" ? (
+          <a href="#scroll" className={styles["nav-button"]}>
+            PRODUCTOS
+          </a>
+        ) : (
           <Link to="/">
-            <button className={styles["nav-button"]}>INICIO</button>
+            <button className={styles["nav-button"]}>PRODUCTOS</button>
           </Link>
+        )}
 
-          {location.pathname === "/" ? (
-            <a href="#scroll" className={styles["nav-button"]}>
-              PRODUCTOS
-            </a>
-          ) : (
-            <Link to="/">
-              <button className={styles["nav-button"]}>PRODUCTOS</button>
-            </Link>
-          )}
-
-          <Link to="/">
-            <div className={styles["dropdown"]}>
-              <button className={styles["nav-button"]}>
-                OPCIONES DE ADMINISTRADOR
-              </button>
-              <div className={styles["dropdown-content"]}>
-                <Link
-                  to="/panel-admin/products"
-                  className={styles["text-decoration"]}
-                >
-                  <button>PRODUCTOS</button>
-                </Link>
-                <Link
-                  to="/panel-admin/categories"
-                  className={styles["text-decoration"]}
-                >
-                  <button>CATEGORIAS</button>
-                </Link>
-              </div>
+        <Link to="/">
+          <div className={styles["dropdown"]}>
+            <button className={styles["nav-button"]}>
+              OPCIONES DE ADMINISTRADOR
+            </button>
+            <div className={styles["dropdown-content"]}>
+              <Link
+                to="/panel-admin/products"
+                className={styles["text-decoration"]}
+              >
+                <button>PRODUCTOS</button>
+              </Link>
+              <Link
+                to="/panel-admin/categories"
+                className={styles["text-decoration"]}
+              >
+                <button>CATEGORIAS</button>
+              </Link>
             </div>
-          </Link>
-        </div>
-
-        <div className={styles["left"]}>
-          <i className="fa-solid fa-cart-shopping" onClick={handleClick}></i>
+          </div>
+        </Link>
+        <div className={styles["icon-wrapper"]} onClick={handleClick}>
+          <i className="fa-solid fa-cart-shopping"></i>
         </div>
       </nav>
     </>

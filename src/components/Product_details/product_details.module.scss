@@ -108,3 +108,13 @@
 .noDecoration {
   text-decoration: none;
 }
+
+.sin-stock-button {
+  background-color: #d4d3d3;
+  color: #888;
+  cursor: not-allowed;
+  pointer-events: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}

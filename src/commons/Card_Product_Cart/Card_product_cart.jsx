@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./card_product_cart.module.scss";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductCard = ({
   id,
@@ -19,6 +20,8 @@ const ProductCard = ({
     return filterCarts[0].quantity || 1;
   });
 
+  const notify = (message) => toast.error(message);
+
   const handleClick = () => {
     setCart(() => {
       cart = cart.filter((item) => item.id !== id);
@@ -26,6 +29,7 @@ const ProductCard = ({
       localStorage.setItem("cart", JSON.stringify(cart));
 
       setChangeQuantity(!changeQuantity);
+
       return cart;
     });
   };
@@ -42,6 +46,8 @@ const ProductCard = ({
       localStorage.setItem("cart", JSON.stringify(cart));
 
       setChangeQuantity(!changeQuantity);
+    } else {
+      notify("No puedes reducir la cantidad por debajo de 1.");
     }
   };
 
@@ -54,6 +60,8 @@ const ProductCard = ({
       localStorage.setItem("cart", JSON.stringify(cart));
 
       setChangeQuantity(!changeQuantity);
+    } else if (quantity >= stock) {
+      notify("No hay suficiente stock.");
     }
   };
 
@@ -67,13 +75,12 @@ const ProductCard = ({
         <div className={styles["quantity-controls"]}>
           <button onClick={decrementQuantity}>-</button>
           <input type="text" value={quantity} readOnly />
-          <button onClick={incrementQuantity} disabled={quantity === stock}>
-            +
-          </button>
+          <button onClick={incrementQuantity}>+</button>
         </div>
         <p className={styles["product-stock"]}>Stock {stock} u.</p>
       </div>
       <i className="fa-solid fa-trash" onClick={handleClick}></i>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };
