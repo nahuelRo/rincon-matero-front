@@ -1,0 +1,80 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+@use "../../styles/reset" as *;
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 4rem;
+  padding-top: 2rem;
+}
+
+.header {
+  height: 10rem;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: $secondary-color, $alpha: 0.4);
+  width: 80px;
+  height: 80px;
+  text-decoration: none;
+  border-radius: 50%;
+
+  i {
+    font-size: 2rem;
+    color: $primary-color;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #cc0000;
+    }
+  }
+}
+
+.container {
+  width: 80%;
+  height: 80%;
+}
+
+.header_title {
+  padding: 2rem 0;
+  font-size: 2.5rem;
+}
+
+.table {
+  width: 100%;
+
+  thead {
+    font-size: 1.5rem;
+  }
+
+  th:nth-child(1) {
+    width: 40%;
+  }
+
+  th {
+    background-color: white;
+  }
+
+  tr {
+    height: 4rem;
+  }
+
+  tr:nth-child(odd) {
+    background-color: rgba($color: $secondary-color, $alpha: 0.5);
+  }
+}

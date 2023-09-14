@@ -24,24 +24,20 @@ const Dashboard = () => {
   };
 
   return (
-    <section>
-      <header>
-        <div>
-          <h2>Añadir nuevo</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
-        <div>
-          <Link to="/panel-create">
-            <button>+</button>
-          </Link>
-        </div>
+    <section className={styles.dashboard}>
+      <header className={styles.header}>
+        <h2>Añadir nuevo</h2>
+
+        <Link to={`/panel-create/${name}`} className={styles.button}>
+          <i class="fa-solid fa-plus"></i>
+        </Link>
       </header>
-      <article>
-        <header>
-          <h2>Todos los productos {}</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </header>
-        <table>
+      <article className={styles.container}>
+        <h2 className={styles.header_title}>
+          Todos {name === "products" ? "los productos" : "las categorias"}
+        </h2>
+
+        <table className={styles.table}>
           <thead>
             {name === "products" ? (
               <tr>
