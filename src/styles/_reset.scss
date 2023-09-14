@@ -1,3 +1,5 @@
+@use "./colors" as *;
+
 * {
   margin: 0;
   padding: 0;
@@ -6,4 +8,18 @@
   border: none;
   font-family: "Kanit", sans-serif;
   // https://fonts.google.com/specimen/Kanit
+
+  /* Estilos del scrollbar global */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondary-color;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $primary-color;
+  }
 }

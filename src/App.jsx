@@ -19,7 +19,6 @@ import HistoryDetails from "./components/history_details/History_details";
 import Dashboard from "./commons/Dashboard/Dashboard";
 import Panel_edit from "./components/Panel_edit/Panel_edit";
 
-
 function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
