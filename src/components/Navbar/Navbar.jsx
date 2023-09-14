@@ -57,8 +57,6 @@ const NavbarComponent = () => {
                 MI CUENTA
               </button>
               <div className={styles["dropdown-content"]}>
-                <button>Ver Perfil</button>
-
                 <Link to={"/perfil"} className={styles["text-decoration"]}>
                   <button>Ver Perfil</button>
                 </Link>
