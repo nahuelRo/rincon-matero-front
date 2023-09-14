@@ -48,9 +48,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
+        {/* Dashboard */}
         <Route path="/panel-admin/:name" element={<Dashboard />} />
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
-        <Route path="/panel-create" element={<Panel_create />} />
+        <Route path="/panel-create/:name" element={<Panel_create />} />
 
         <Route
           path="/product/:id"
