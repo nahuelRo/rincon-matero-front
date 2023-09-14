@@ -20,6 +20,7 @@ import Dashboard from "./commons/Dashboard/Dashboard";
 import Panel_edit from "./components/Panel_edit/Panel_edit";
 import Panel_create from "./components/Panel_create/Panel_create";
 
+
 function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
