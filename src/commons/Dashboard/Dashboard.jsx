@@ -42,7 +42,6 @@ const Dashboard = () => {
         <table>
           <thead>
             <tr>
-              <th>Imagen</th>
               <th>Nombre</th>
               <th>Descripcion</th>
               <th>Categoria</th>
