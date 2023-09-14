@@ -62,7 +62,37 @@ function App() {
 
         <Route
           path="/product/:id"
+
+          element={
+            <>
+              {" "}
+              <NavbarComponent /> <ProductDetails product={product} />{" "}
+              <PurchaseInfo />{" "}
+            </>
+          }
+        />
+        <Route
+          path="/shoppingCart"
+          element={
+            <>
+              <NavbarComponent />
+              <ShoppingCart />
+              <PurchaseInfo />
+            </>
+          }
+        />
+        <Route
+          path="/historyDetails/:id"
+          element={
+            <>
+              <NavbarComponent />
+              <HistoryDetails />
+              <PurchaseInfo />
+            </>
+          }
+
           element={<ProductDetails product={product} />}
+
         />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
         <Route path="/historyDetails/:id" element={<HistoryDetails />} />

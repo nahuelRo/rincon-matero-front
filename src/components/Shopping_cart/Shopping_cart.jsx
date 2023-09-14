@@ -3,11 +3,12 @@ import ProductCard from "../../commons/Card_Product_Cart/Card_product_cart";
 import styles from "./Shopping_cart.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ShoppingCart = () => {
   const user = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   });
@@ -33,7 +34,20 @@ const ShoppingCart = () => {
           { withCredentials: true }
         );
 
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Gracias ${user.name}, ¡Tu compra ha sido realizada!`,
+          showConfirmButton: false,
+          timer: 2500,
+          backdrop: "transparent",
+        }).then(() => {
+          navigate("/");
+        });
+
         console.log(response.data.message);
+
       }
     } catch (error) {
       console.error("Error al realizar el checkout", error);
@@ -69,7 +83,15 @@ const ShoppingCart = () => {
           <span className={styles.summaryPrice}>{totalPrice}</span>
         </div>
         <Link to={user.name ? "/checkout" : "/login"}>
+
+          <button
+            className={styles.buttonCheckout}
+            onClick={handleCheckout}
+            disabled={cart.length === 0}
+          >
+
           <button className={styles.buttonCheckout} onClick={handleCheckout}>
+
             CHECKOUT
           </button>
         </Link>
