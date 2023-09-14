@@ -23,13 +23,15 @@ const Row_data = ({ handleDelete, item, name }) => {
 
       <td>
         <div>
-          <button>...</button>
-          <div>
+          <div className={styles.icons}>
             <Link to={`/panel-edit/${name}/${item.id}`}>
-              <button>Editar</button>
+              <i class="fa-solid fa-pencil"></i>
             </Link>
 
-            <button onClick={() => handleDelete(item.id)}>Eliminar</button>
+            <i
+              class="fa-solid fa-trash"
+              onClick={() => handleDelete(item.id)}
+            ></i>
           </div>
         </div>
       </td>

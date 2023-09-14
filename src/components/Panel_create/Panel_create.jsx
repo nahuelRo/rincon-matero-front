@@ -11,10 +11,14 @@ const Panel_edit = () => {
 
   const navigate = useNavigate();
 
+  const { name } = useParams();
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/categories`, { withCredentials: true })
-      .then((res) => setCategories(res.data));
+    if (name === "products") {
+      axios
+        .get(`http://localhost:3001/api/categories`, { withCredentials: true })
+        .then((res) => setCategories(res.data));
+    }
   }, []);
 
   const {
@@ -24,25 +28,38 @@ const Panel_edit = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    axios
-      .post(
-        "http://localhost:3001/api/products",
-        {
-          image:
-            "https://www.carsaludable.com.ar/wp-content/uploads/2014/03/default-placeholder.png",
-          name: data.itemName,
-          description: data.description,
-          price: data.price,
-          categoryId: data.category,
-          stock: data.stock,
-        },
-        { withCredentials: true }
-      )
-      .then(() => navigate("/panel-admin/products"));
+    if (name === "products") {
+      axios
+        .post(
+          "http://localhost:3001/api/products",
+          {
+            image:
+              "https://www.carsaludable.com.ar/wp-content/uploads/2014/03/default-placeholder.png",
+            name: data.itemName,
+            description: data.description,
+            price: data.price,
+            categoryId: data.category,
+            stock: data.stock,
+          },
+          { withCredentials: true }
+        )
+        .then(() => navigate("/panel-admin/products"));
+    } else {
+      axios
+        .post(
+          "http://localhost:3001/api/categories",
+          {
+            name: data.itemName,
+            description: data.description,
+          },
+          { withCredentials: true }
+        )
+        .then(() => navigate("/panel-admin/categories"));
+    }
   };
 
   const handleClick = () => {
-    navigate("/panel-admin/products");
+    navigate(`/panel-admin/${name}`);
   };
 
   return (
@@ -53,7 +70,9 @@ const Panel_edit = () => {
         className={styles.form}
       >
         <header className={styles.header}>
-          <h2 className={styles["header__title"]}>{`Crear producto`}</h2>
+          <h2 className={styles["header__title"]}>
+            Crear {name === "categories" ? "Categorias" : "Productos"}
+          </h2>
           <p className={styles["header__exit"]} onClick={handleClick}>
             X
           </p>
@@ -62,34 +81,59 @@ const Panel_edit = () => {
         <hr className={styles.separator} />
 
         <div className={styles.fieldsWrapper}>
-          <Input
-            name="nombre"
-            type="text"
-            controller={register("itemName")}
-            errors={errors.name && errors.name.message}
-          />
+          {name === "categories" ? (
+            <>
+              <Input
+                name="nombre"
+                type="text"
+                controller={register("itemName")}
+                errors={errors.name && errors.name.message}
+              />
 
-          <Input
-            name="descripción"
-            type="text"
-            controller={register("description")}
-            errors={errors.last_name && errors.last_name.message}
-          />
+              <Input
+                name="descripción"
+                type="text"
+                controller={register("description")}
+                errors={errors.last_name && errors.last_name.message}
+              />
+            </>
+          ) : (
+            <>
+              <Input
+                name="nombre"
+                type="text"
+                controller={register("itemName")}
+                errors={errors.name && errors.name.message}
+              />
+              <Input
+                name="descripción"
+                type="text"
+                controller={register("description")}
+                errors={errors.last_name && errors.last_name.message}
+              />
+              <label htmlFor="category">Categorias:</label>
+              <select {...register("category")}>
+                {categories?.map((category, index) => (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <div className={styles.twofields}>
+                <Input
+                  name="precio"
+                  type="number"
+                  controller={register("price")}
+                />
 
-          <label htmlFor="category">Categorias:</label>
-          <select {...register("category")}>
-            {categories?.map((category, index) => (
-              <option key={index} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-
-          <div className={styles.twofields}>
-            <Input name="precio" type="number" controller={register("price")} />
-
-            <Input name="Stock" type="number" controller={register("stock")} />
-          </div>
+                <Input
+                  name="Stock"
+                  type="number"
+                  controller={register("stock")}
+                />
+              </div>
+            </>
+          )}
         </div>
 
         <hr className={styles.separator} />
