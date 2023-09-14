@@ -89,6 +89,7 @@
   position: relative;
   display: inline-block;
   margin-right: 50px;
+
   &:hover .dropdown-content {
     display: block;
   }
@@ -110,6 +111,7 @@
   display: block;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
   background-color: transparent;
   width: 100%;
 }
@@ -117,4 +119,8 @@
 .dropdown-content button:hover {
   background-color: $secondary-color;
   color: $text-color;
+}
+
+.text-decoration {
+  text-decoration: none;
 }

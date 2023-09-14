@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import ProductCard from "../../commons/Card_Product_Cart/Card_product_cart";
 import styles from "./Shopping_cart.module.scss";
-
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -23,6 +23,22 @@ const ShoppingCart = () => {
         .toFixed(2);
     });
   }, [changeQuantity, cart]);
+
+  const handleCheckout = async () => {
+    try {
+      if (totalPrice !== null) {
+        const response = await axios.post(
+          `http://localhost:3001/api/orders/user/${user.id}/checkout`,
+          { total_price: totalPrice, items: cart },
+          { withCredentials: true }
+        );
+
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error al realizar el checkout", error);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -53,7 +69,9 @@ const ShoppingCart = () => {
           <span className={styles.summaryPrice}>{totalPrice}</span>
         </div>
         <Link to={user.name ? "/checkout" : "/login"}>
-          <button className={styles.buttonCheckout}>CHECKOUT</button>
+          <button className={styles.buttonCheckout} onClick={handleCheckout}>
+            CHECKOUT
+          </button>
         </Link>
       </div>
     </div>
