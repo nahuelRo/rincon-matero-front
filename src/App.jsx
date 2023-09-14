@@ -18,7 +18,7 @@ import HistoryDetails from "./components/history_details/History_details";
 
 import Dashboard from "./commons/Dashboard/Dashboard";
 import Panel_edit from "./components/Panel_edit/Panel_edit";
-
+import UserProfileView from "./components/User_profile/User_profile_view";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ function App() {
         />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/perfil" element={<UserProfileView />} />
         <Route path="/panel-admin/:name" element={<Dashboard />} />
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
 
