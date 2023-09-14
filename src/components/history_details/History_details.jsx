@@ -10,7 +10,9 @@ const HistoryDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/orders/user/${id}/history`)
+      .get(`http://localhost:3001/api/orders/user/${id}/history`, {
+        withCredentials: true,
+      })
       .then((response) => {
         const groupedOrders = {};
 

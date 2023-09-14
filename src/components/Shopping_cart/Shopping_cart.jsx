@@ -42,10 +42,9 @@ const ShoppingCart = () => {
           timer: 2500,
           backdrop: "transparent",
         }).then(() => {
+          localStorage.removeItem("cart");
           navigate("/");
         });
-
-        console.log(response.data.message);
       }
     } catch (error) {
       console.error("Error al realizar el checkout", error);
