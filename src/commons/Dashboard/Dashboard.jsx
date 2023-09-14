@@ -33,7 +33,7 @@ const Dashboard = () => {
         <h2>Añadir nuevo</h2>
 
         <Link to={`/panel-create/${name}`} className={styles.button}>
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </Link>
       </header>
       <article className={styles.container}>
