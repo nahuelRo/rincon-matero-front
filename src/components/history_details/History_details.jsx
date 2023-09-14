@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CardHistory from "../../commons/Card_History_Products/Card_history_products"; // Asegúrate de importar el componente correcto
+import CardHistory from "../../commons/Card_History_Products/Card_history_products";
 import styles from "./history_details.module.scss";
 import axios from "axios";
 
@@ -9,11 +9,22 @@ const HistoryDetails = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    console.log("IDDDDDDDDDDDDDDDDDDDDDDDDD:", id);
     axios
-      .get(`http://localhost:3001/api/orders/user/${id}/history`) // Utiliza la variable id en lugar de 1
+      .get(`http://localhost:3001/api/orders/user/${id}/history`)
       .then((response) => {
-        setOrders(response.data);
+        const groupedOrders = {};
+
+        response.data.forEach((order) => {
+          if (groupedOrders[order.orderId]) {
+            groupedOrders[order.orderId].products.push(...order.products);
+          } else {
+            groupedOrders[order.orderId] = { ...order };
+          }
+        });
+
+        const groupedOrdersArray = Object.values(groupedOrders);
+
+        setOrders(groupedOrdersArray);
       })
       .catch((error) => {
         console.error("Error fetching orders:", error);
