@@ -67,7 +67,7 @@ function App() {
         ) : (
           ""
         )}
-
+        <Route path="/historyDetails/:id" element={<HistoryDetails />} />
         <Route path="*" element={<Navigate to="/notFound" />} />
         <Route path="/notFound" element={<Not_found />} />
 
@@ -76,7 +76,6 @@ function App() {
           element={<ProductDetails product={product} />}
         />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
-        <Route path="/historyDetails/:id" element={<HistoryDetails />} />
       </Routes>
       <PurchaseInfo />
     </>
