@@ -10,24 +10,10 @@ const Panel_edit = () => {
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
-  const { name, id } = useParams();
 
-  const {
-    handleSubmit,
-    register,
-    getValues,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { name } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/${name}/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        initializeForm(res.data);
-      });
     if (name === "products") {
       axios
         .get(`http://localhost:3001/api/categories`, { withCredentials: true })
@@ -35,36 +21,41 @@ const Panel_edit = () => {
     }
   }, []);
 
-  const initializeForm = (data) => {
-    if (name === "products") {
-      setValue("category", data?.category?.id.toString());
-      setValue("itemName", data.name);
-      setValue("description", data.description);
-      setValue("price", data.price);
-      setValue("stock", data.stock);
-    } else {
-      setValue("itemName", data.name);
-      setValue("description", data.description);
-    }
-  };
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
-    axios
-      .put(
-        `http://localhost:3001/api/${name}/${id}`,
-        {
-          name: data.itemName,
-          description: data.description,
-          price: data.price,
-          stock: data.stock,
-          categoryId: data.category,
-        },
-        { withCredentials: true }
-      )
-      .then(() => {
-        navigate(`/panel-admin/${name}`);
-      })
-      .catch((error) => console.log(error));
+    if (name === "products") {
+      axios
+        .post(
+          "http://localhost:3001/api/products",
+          {
+            image:
+              "https://www.carsaludable.com.ar/wp-content/uploads/2014/03/default-placeholder.png",
+            name: data.itemName,
+            description: data.description,
+            price: data.price,
+            categoryId: data.category,
+            stock: data.stock,
+          },
+          { withCredentials: true }
+        )
+        .then(() => navigate("/panel-admin/products"));
+    } else {
+      axios
+        .post(
+          "http://localhost:3001/api/categories",
+          {
+            name: data.itemName,
+            description: data.description,
+          },
+          { withCredentials: true }
+        )
+        .then(() => navigate("/panel-admin/categories"));
+    }
   };
 
   const handleClick = () => {
@@ -79,7 +70,9 @@ const Panel_edit = () => {
         className={styles.form}
       >
         <header className={styles.header}>
-          <h2 className={styles["header__title"]}>{`Editar producto`}</h2>
+          <h2 className={styles["header__title"]}>
+            Crear {name === "categories" ? "Categorias" : "Productos"}
+          </h2>
           <p className={styles["header__exit"]} onClick={handleClick}>
             X
           </p>
@@ -87,14 +80,13 @@ const Panel_edit = () => {
 
         <hr className={styles.separator} />
 
-        {name === "categories" ? (
-          <>
-            <div className={styles.fieldsWrapper}>
+        <div className={styles.fieldsWrapper}>
+          {name === "categories" ? (
+            <>
               <Input
                 name="nombre"
                 type="text"
                 controller={register("itemName")}
-                defaultValue={getValues("itemName")}
                 errors={errors.name && errors.name.message}
               />
 
@@ -102,30 +94,23 @@ const Panel_edit = () => {
                 name="descripción"
                 type="text"
                 controller={register("description")}
-                defaultValue={getValues("description")}
                 errors={errors.last_name && errors.last_name.message}
               />
-            </div>
-          </>
-        ) : (
-          <>
-            <div className={styles.fieldsWrapper}>
+            </>
+          ) : (
+            <>
               <Input
                 name="nombre"
                 type="text"
                 controller={register("itemName")}
-                defaultValue={getValues("itemName")}
                 errors={errors.name && errors.name.message}
               />
-
               <Input
                 name="descripción"
                 type="text"
                 controller={register("description")}
-                defaultValue={getValues("description")}
                 errors={errors.last_name && errors.last_name.message}
               />
-
               <label htmlFor="category">Categorias:</label>
               <select {...register("category")}>
                 {categories?.map((category, index) => (
@@ -134,30 +119,27 @@ const Panel_edit = () => {
                   </option>
                 ))}
               </select>
-
               <div className={styles.twofields}>
                 <Input
                   name="precio"
                   type="number"
                   controller={register("price")}
-                  defaultValue={getValues("price")}
                 />
 
                 <Input
                   name="Stock"
                   type="number"
                   controller={register("stock")}
-                  defaultValue={getValues("stock")}
                 />
               </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
 
         <hr className={styles.separator} />
 
         <button type="submit" className={styles.submit}>
-          {isLoading ? "Loading" : "FINALIZAR EDICIÓN"}
+          {isLoading ? "Loading" : "Crear"}
         </button>
       </form>
     </section>

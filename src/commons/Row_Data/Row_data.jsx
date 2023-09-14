@@ -3,23 +3,35 @@ import styles from "./row_data.module.scss";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Row_data = ({ handleDelete, product }) => {
+const Row_data = ({ handleDelete, item, name }) => {
   return (
     <tr>
-      <td>{product.name}</td>
-      <td>{product.description}</td>
-      <td>{product.category.name}</td>
-      <td>{product.price}</td>
-      <td>{product.stock}</td>
+      {!item.price ? (
+        <>
+          <td>{item.name}</td>
+          <td>{item.description}</td>
+        </>
+      ) : (
+        <>
+          <td>{item.name}</td>
+          <td>{item.description}</td>
+          <td>{item.category.name}</td>
+          <td>{item.price}</td>
+          <td>{item.stock}</td>
+        </>
+      )}
 
       <td>
         <div>
-          <button>...</button>
-          <div>
-            <Link to={`/panel-edit/products/${product.id}`}>
-              <button>Editar</button>
+          <div className={styles.icons}>
+            <Link to={`/panel-edit/${name}/${item.id}`}>
+              <i class="fa-solid fa-pencil"></i>
             </Link>
-            <button onClick={() => handleDelete(product.id)}>Eliminar</button>
+
+            <i
+              class="fa-solid fa-trash"
+              onClick={() => handleDelete(item.id)}
+            ></i>
           </div>
         </div>
       </td>
