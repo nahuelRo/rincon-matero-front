@@ -65,11 +65,6 @@ function App() {
           element={<ProductDetails product={product} />}
         />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
-        <Route
-          path="/historyDetails/:id"
-          element={<ProductDetails product={product} />}
-        />
-        <Route path="/shoppingCart" element={<ShoppingCart />} />
         <Route path="/historyDetails/:id" element={<HistoryDetails />} />
       </Routes>
       <PurchaseInfo />
