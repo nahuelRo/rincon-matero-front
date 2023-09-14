@@ -17,10 +17,14 @@ const Dashboard = () => {
 
   // Alerta eliminar todos los productos de una categoria
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/api/${name}/${id}`).then((res) => {
-      const deletedProduct = res.data;
-      setContent(content.filter((item) => item.id !== deletedProduct.id));
-    });
+    axios
+      .delete(`http://localhost:3001/api/${name}/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const deletedProduct = res.data;
+        setContent(content.filter((item) => item.id !== deletedProduct.id));
+      });
   };
 
   return (

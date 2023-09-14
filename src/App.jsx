@@ -6,9 +6,9 @@ import fakeData from "./utils/fakeData";
 import Register from "./components/Register/Register";
 import NavbarComponent from "./components/Navbar/Navbar";
 import Grid from "./components/Grid/Grid";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/userReducer";
 import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
@@ -23,9 +23,13 @@ import UserProfileView from "./components/User_profile/User_profile_view";
 
 import Panel_create from "./components/Panel_create/Panel_create";
 
+import Not_found from "./components/Not_found/Not_found";
+
 function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     axios
       .post("http://localhost:3001/api/auth/me", null, {
@@ -54,11 +58,18 @@ function App() {
 
         <Route path="/perfil" element={<UserProfileView />} />
 
-        {/* Dashboard */}
+        {user.role === "ADMIN" ? (
+          <>
+            <Route path="/panel-admin/:name" element={<Dashboard />} />
+            <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
+            <Route path="/panel-create/:name" element={<Panel_create />} />
+          </>
+        ) : (
+          ""
+        )}
 
-        <Route path="/panel-admin/:name" element={<Dashboard />} />
-        <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
-        <Route path="/panel-create/:name" element={<Panel_create />} />
+        <Route path="*" element={<Navigate to="/notFound" />} />
+        <Route path="/notFound" element={<Not_found />} />
 
         <Route
           path="/product/:id"
