@@ -34,7 +34,6 @@ const ShoppingCart = () => {
           { withCredentials: true }
         );
 
-
         Swal.fire({
           position: "center",
           icon: "success",
@@ -47,7 +46,6 @@ const ShoppingCart = () => {
         });
 
         console.log(response.data.message);
-
       }
     } catch (error) {
       console.error("Error al realizar el checkout", error);
@@ -83,15 +81,11 @@ const ShoppingCart = () => {
           <span className={styles.summaryPrice}>{totalPrice}</span>
         </div>
         <Link to={user.name ? "/checkout" : "/login"}>
-
           <button
             className={styles.buttonCheckout}
             onClick={handleCheckout}
             disabled={cart.length === 0}
           >
-
-          <button className={styles.buttonCheckout} onClick={handleCheckout}>
-
             CHECKOUT
           </button>
         </Link>
