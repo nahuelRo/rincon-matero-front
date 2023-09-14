@@ -23,8 +23,6 @@ import UserProfileView from "./components/User_profile/User_profile_view";
 
 import Panel_create from "./components/Panel_create/Panel_create";
 
-
-
 function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
@@ -50,11 +48,11 @@ function App() {
             </>
           }
         />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/perfil" element={<UserProfileView />} />
-
 
         {/* Dashboard */}
 

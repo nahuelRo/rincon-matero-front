@@ -8,9 +8,7 @@ const UserProfileView = () => {
   const user = useSelector((state) => state.user);
   return (
     <div>
-      <NavbarComponent />
       <UserProfile user={user} />
-      <Purchase_info />
     </div>
   );
 };

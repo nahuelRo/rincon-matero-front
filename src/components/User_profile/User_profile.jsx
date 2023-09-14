@@ -5,7 +5,6 @@ import logoUser from "../../assets/585e4beacb11b227491c3399.png";
 const UserProfile = ({ user }) => {
   return (
     <>
-      <h1 className={styles["profile-user"]}>Mi perfil</h1>
       <div className={styles["profile-body"]}>
         <div className={styles["profile-card"]}>
           <div className={styles["profile-img"]}>

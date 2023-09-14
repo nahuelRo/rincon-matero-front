@@ -2,12 +2,6 @@
 @use "../../styles/fonts" as *;
 @use "../../styles/reset" as *;
 
-.profile-user {
-  margin-left: 100px;
-  margin-top: 100px;
-  font-size: $font-size-xl;
-}
-
 .profile-body {
   background: $tertiary-color;
   color: $text-color;
