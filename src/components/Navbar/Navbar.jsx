@@ -103,10 +103,16 @@ const NavbarComponent = () => {
                 OPCIONES DE ADMINISTRADOR
               </button>
               <div className={styles["dropdown-content"]}>
-                <Link to="/panel-admin/products">
+                <Link
+                  to="/panel-admin/products"
+                  className={styles["text-decoration"]}
+                >
                   <button>PRODUCTOS</button>
                 </Link>
-                <Link to="/panel-admin/categories">
+                <Link
+                  to="/panel-admin/categories"
+                  className={styles["text-decoration"]}
+                >
                   <button>CATEGORIAS</button>
                 </Link>
               </div>
