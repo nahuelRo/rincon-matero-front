@@ -8,7 +8,7 @@ import NavbarComponent from "./components/Navbar/Navbar";
 import Grid from "./components/Grid/Grid";
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/userReducer";
 import ShoppingCart from "./components/Shopping_cart/Shopping_cart";
 import Carrousel from "./components/Carrousel/Carrousel";
@@ -22,6 +22,7 @@ import Panel_edit from "./components/Panel_edit/Panel_edit";
 import UserProfileView from "./components/User_profile/User_profile_view";
 
 import Panel_create from "./components/Panel_create/Panel_create";
+import SearchBar from "./components/Search/Search";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/perfil" element={<UserProfileView />} />
-
+        <Route path="/search" element={<SearchBar />} />
         {/* Dashboard */}
 
         <Route path="/panel-admin/:name" element={<Dashboard />} />
