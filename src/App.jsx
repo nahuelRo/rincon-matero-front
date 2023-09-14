@@ -6,7 +6,7 @@ import fakeData from "./utils/fakeData";
 import Register from "./components/Register/Register";
 import NavbarComponent from "./components/Navbar/Navbar";
 import Grid from "./components/Grid/Grid";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./state/userReducer";
@@ -24,9 +24,13 @@ import UserProfileView from "./components/User_profile/User_profile_view";
 import Panel_create from "./components/Panel_create/Panel_create";
 import SearchBar from "./components/Search/Search";
 
+import Not_found from "./components/Not_found/Not_found";
+
 function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     axios
       .post("http://localhost:3001/api/auth/me", null, {
@@ -54,6 +58,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/perfil" element={<UserProfileView />} />
+
         <Route path="/search" element={<SearchBar />} />
         {/* Dashboard */}
 
@@ -61,12 +66,25 @@ function App() {
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
         <Route path="/panel-create/:name" element={<Panel_create />} />
 
+
+        {user.role === "ADMIN" ? (
+          <>
+            <Route path="/panel-admin/:name" element={<Dashboard />} />
+            <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
+            <Route path="/panel-create/:name" element={<Panel_create />} />
+          </>
+        ) : (
+          ""
+        )}
+        <Route path="/historyDetails/:id" element={<HistoryDetails />} />
+        <Route path="*" element={<Navigate to="/notFound" />} />
+        <Route path="/notFound" element={<Not_found />} />
+
         <Route
           path="/product/:id"
           element={<ProductDetails product={product} />}
         />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
-        <Route path="/historyDetails/:id" element={<HistoryDetails />} />
       </Routes>
       <PurchaseInfo />
     </>
