@@ -7,7 +7,6 @@ import axios from "axios";
 
 const Panel_edit = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
