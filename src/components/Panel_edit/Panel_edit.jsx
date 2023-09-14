@@ -7,25 +7,10 @@ import axios from "axios";
 
 const Panel_edit = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState({});
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/products/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setContent(res.data);
-        initializeForm(res.data);
-      });
-
-    axios
-      .get(`http://localhost:3001/api/categories`, { withCredentials: true })
-      .then((res) => setCategories(res.data));
-  }, []);
+  const { name, id } = useParams();
 
   const {
     handleSubmit,
@@ -35,18 +20,38 @@ const Panel_edit = () => {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/${name}/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        initializeForm(res.data);
+      });
+    if (name === "products") {
+      axios
+        .get(`http://localhost:3001/api/categories`, { withCredentials: true })
+        .then((res) => setCategories(res.data));
+    }
+  }, []);
+
   const initializeForm = (data) => {
-    setValue("category", data?.category?.id.toString());
-    setValue("itemName", data.name);
-    setValue("description", data.description);
-    setValue("price", data.price);
-    setValue("stock", data.stock);
+    if (name === "products") {
+      setValue("category", data?.category?.id.toString());
+      setValue("itemName", data.name);
+      setValue("description", data.description);
+      setValue("price", data.price);
+      setValue("stock", data.stock);
+    } else {
+      setValue("itemName", data.name);
+      setValue("description", data.description);
+    }
   };
 
   const onSubmit = (data) => {
     axios
       .put(
-        `http://localhost:3001/api/products/${id}`,
+        `http://localhost:3001/api/${name}/${id}`,
         {
           name: data.itemName,
           description: data.description,
@@ -57,16 +62,14 @@ const Panel_edit = () => {
         { withCredentials: true }
       )
       .then(() => {
-        navigate("/panel-admin/products");
+        navigate(`/panel-admin/${name}`);
       })
       .catch((error) => console.log(error));
   };
 
   const handleClick = () => {
-    navigate("/panel-admin/products");
+    navigate(`/panel-admin/${name}`);
   };
-
-  const { name, id } = useParams();
 
   return (
     <section className={styles.container}>
@@ -76,7 +79,7 @@ const Panel_edit = () => {
         className={styles.form}
       >
         <header className={styles.header}>
-          <h2 className={styles["header__title"]}>{`Editar productos`}</h2>
+          <h2 className={styles["header__title"]}>{`Editar producto`}</h2>
           <p className={styles["header__exit"]} onClick={handleClick}>
             X
           </p>
@@ -84,48 +87,72 @@ const Panel_edit = () => {
 
         <hr className={styles.separator} />
 
-        <div className={styles.fieldsWrapper}>
-          <Input
-            name="nombre"
-            type="text"
-            controller={register("itemName")}
-            defaultValue={getValues("itemName")}
-            errors={errors.name && errors.name.message}
-          />
+        {name === "categories" ? (
+          <>
+            <div className={styles.fieldsWrapper}>
+              <Input
+                name="nombre"
+                type="text"
+                controller={register("itemName")}
+                defaultValue={getValues("itemName")}
+                errors={errors.name && errors.name.message}
+              />
 
-          <Input
-            name="descripción"
-            type="text"
-            controller={register("description")}
-            defaultValue={getValues("description")}
-            errors={errors.last_name && errors.last_name.message}
-          />
+              <Input
+                name="descripción"
+                type="text"
+                controller={register("description")}
+                defaultValue={getValues("description")}
+                errors={errors.last_name && errors.last_name.message}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.fieldsWrapper}>
+              <Input
+                name="nombre"
+                type="text"
+                controller={register("itemName")}
+                defaultValue={getValues("itemName")}
+                errors={errors.name && errors.name.message}
+              />
 
-          <label htmlFor="category">Categorias:</label>
-          <select {...register("category")}>
-            {categories?.map((category, index) => (
-              <option key={index} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+              <Input
+                name="descripción"
+                type="text"
+                controller={register("description")}
+                defaultValue={getValues("description")}
+                errors={errors.last_name && errors.last_name.message}
+              />
 
-          <div className={styles.twofields}>
-            <Input
-              name="precio"
-              type="number"
-              controller={register("price")}
-              defaultValue={getValues("price")}
-            />
+              <label htmlFor="category">Categorias:</label>
+              <select {...register("category")}>
+                {categories?.map((category, index) => (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
 
-            <Input
-              name="Stock"
-              type="number"
-              controller={register("stock")}
-              defaultValue={getValues("stock")}
-            />
-          </div>
-        </div>
+              <div className={styles.twofields}>
+                <Input
+                  name="precio"
+                  type="number"
+                  controller={register("price")}
+                  defaultValue={getValues("price")}
+                />
+
+                <Input
+                  name="Stock"
+                  type="number"
+                  controller={register("stock")}
+                  defaultValue={getValues("stock")}
+                />
+              </div>
+            </div>
+          </>
+        )}
 
         <hr className={styles.separator} />
 
