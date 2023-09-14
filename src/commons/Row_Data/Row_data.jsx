@@ -25,11 +25,11 @@ const Row_data = ({ handleDelete, item, name }) => {
         <div>
           <div className={styles.icons}>
             <Link to={`/panel-edit/${name}/${item.id}`}>
-              <i class="fa-solid fa-pencil"></i>
+              <i className="fa-solid fa-pencil"></i>
             </Link>
 
             <i
-              class="fa-solid fa-trash"
+              className="fa-solid fa-trash"
               onClick={() => handleDelete(item.id)}
             ></i>
           </div>
