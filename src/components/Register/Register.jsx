@@ -18,18 +18,28 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    axios.post(
-      "http://localhost:3001/api/auth/register",
-      {
-        name: data.name,
-        last_name: data.last_name,
-        email: data.email,
-        address: data.address,
-        password: data.password,
-        role: "USER",
-      },
-      { withCredentials: true }
-    );
+    setIsLoading(true);
+
+    axios
+      .post(
+        "http://localhost:3001/api/auth/register",
+        {
+          name: data.name,
+          last_name: data.last_name,
+          email: data.email,
+          address: data.address,
+          password: data.password,
+          role: "USER",
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setIsLoading(false);
+        navigate("/login");
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleClick = () => {
@@ -140,7 +150,11 @@ const Register = () => {
         <hr className={styles.separator} />
 
         <button className={styles.submit} value="CREAR CUENTA">
-          {isLoading ? "Loading" : "CREAR CUENTA"}
+          {isLoading ? (
+            <span className={styles["loader"]}></span>
+          ) : (
+            "CREAR CUENTA"
+          )}
         </button>
       </form>
     </section>
