@@ -57,10 +57,13 @@ const NavbarComponent = () => {
                 MI CUENTA
               </button>
               <div className={styles["dropdown-content"]}>
-                <Link to={"/perfil"}>
+                <Link to={"/perfil"} className={styles["text-decoration"]}>
                   <button>Ver Perfil</button>
                 </Link>
-                <Link to={`/historyDetails/${user.id}`}>
+                <Link
+                  to={`/historyDetails/${user.id}`}
+                  className={styles["text-decoration"]}
+                >
                   <button>Mis compras</button>
                 </Link>
                 <button onClick={handleLogout}>Cerrar Sesión</button>
