@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./dashboard.module.scss";
 import axios from "axios";
 import RowData from "../Row_Data/Row_data";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [content, setContent] = useState([]);
@@ -19,9 +20,7 @@ const Dashboard = () => {
     });
   };
 
-  const handleEdit = () => {
-    setIsEdit(true);
-  };
+  const handleCreate = () => {};
 
   return (
     <section>
@@ -31,7 +30,9 @@ const Dashboard = () => {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
         <div>
-          <button>boton</button>
+          <Link to="/panel-create">
+            <button>+</button>
+          </Link>
         </div>
       </header>
       <article>

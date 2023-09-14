@@ -18,7 +18,7 @@ import HistoryDetails from "./components/history_details/History_details";
 
 import Dashboard from "./commons/Dashboard/Dashboard";
 import Panel_edit from "./components/Panel_edit/Panel_edit";
-
+import Panel_create from "./components/Panel_create/Panel_create";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,15 +34,14 @@ function App() {
 
   return (
     <>
+      <NavbarComponent />
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <NavbarComponent />
               <Carrousel />
               <Grid />
-              <PurchaseInfo />
             </>
           }
         />
@@ -51,37 +50,16 @@ function App() {
 
         <Route path="/panel-admin/:name" element={<Dashboard />} />
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
+        <Route path="/panel-create" element={<Panel_create />} />
 
         <Route
           path="/product/:id"
-          element={
-            <>
-              {" "}
-              <NavbarComponent /> <ProductDetails product={product} />{" "}
-              <PurchaseInfo />{" "}
-            </>
-          }
+          element={<ProductDetails product={product} />}
         />
-        <Route
-          path="/shoppingCart"
-          element={
-            <>
-              <NavbarComponent />
-              <ShoppingCart />
-            </>
-          }
-        />
-        <Route
-          path="/historyDetails/:id"
-          element={
-            <>
-              <NavbarComponent />
-              <HistoryDetails />
-              <PurchaseInfo />
-            </>
-          }
-        />
+        <Route path="/shoppingCart" element={<ShoppingCart />} />
+        <Route path="/historyDetails/:id" element={<HistoryDetails />} />
       </Routes>
+      <PurchaseInfo />
     </>
   );
 }

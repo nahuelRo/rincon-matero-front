@@ -7,21 +7,11 @@ import axios from "axios";
 
 const Panel_edit = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState({});
   const [categories, setCategories] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/products/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setContent(res.data);
-        initializeForm(res.data);
-      });
-
     axios
       .get(`http://localhost:3001/api/categories`, { withCredentials: true })
       .then((res) => setCategories(res.data));
@@ -30,43 +20,30 @@ const Panel_edit = () => {
   const {
     handleSubmit,
     register,
-    getValues,
-    setValue,
     formState: { errors },
   } = useForm();
 
-  const initializeForm = (data) => {
-    setValue("category", data?.category?.id.toString());
-    setValue("itemName", data.name);
-    setValue("description", data.description);
-    setValue("price", data.price);
-    setValue("stock", data.stock);
-  };
-
   const onSubmit = (data) => {
     axios
-      .put(
-        `http://localhost:3001/api/products/${id}`,
+      .post(
+        "http://localhost:3001/api/products",
         {
+          image:
+            "https://www.carsaludable.com.ar/wp-content/uploads/2014/03/default-placeholder.png",
           name: data.itemName,
           description: data.description,
           price: data.price,
-          stock: data.stock,
           categoryId: data.category,
+          stock: data.stock,
         },
         { withCredentials: true }
       )
-      .then(() => {
-        navigate("/panel-admin/products");
-      })
-      .catch((error) => console.log(error));
+      .then(() => navigate("/panel-admin/products"));
   };
 
   const handleClick = () => {
     navigate("/panel-admin/products");
   };
-
-  const { name, id } = useParams();
 
   return (
     <section className={styles.container}>
@@ -76,7 +53,7 @@ const Panel_edit = () => {
         className={styles.form}
       >
         <header className={styles.header}>
-          <h2 className={styles["header__title"]}>{`Editar producto`}</h2>
+          <h2 className={styles["header__title"]}>{`Crear producto`}</h2>
           <p className={styles["header__exit"]} onClick={handleClick}>
             X
           </p>
@@ -89,7 +66,6 @@ const Panel_edit = () => {
             name="nombre"
             type="text"
             controller={register("itemName")}
-            defaultValue={getValues("itemName")}
             errors={errors.name && errors.name.message}
           />
 
@@ -97,7 +73,6 @@ const Panel_edit = () => {
             name="descripción"
             type="text"
             controller={register("description")}
-            defaultValue={getValues("description")}
             errors={errors.last_name && errors.last_name.message}
           />
 
@@ -111,26 +86,16 @@ const Panel_edit = () => {
           </select>
 
           <div className={styles.twofields}>
-            <Input
-              name="precio"
-              type="number"
-              controller={register("price")}
-              defaultValue={getValues("price")}
-            />
+            <Input name="precio" type="number" controller={register("price")} />
 
-            <Input
-              name="Stock"
-              type="number"
-              controller={register("stock")}
-              defaultValue={getValues("stock")}
-            />
+            <Input name="Stock" type="number" controller={register("stock")} />
           </div>
         </div>
 
         <hr className={styles.separator} />
 
         <button type="submit" className={styles.submit}>
-          {isLoading ? "Loading" : "FINALIZAR EDICIÓN"}
+          {isLoading ? "Loading" : "Crear"}
         </button>
       </form>
     </section>
