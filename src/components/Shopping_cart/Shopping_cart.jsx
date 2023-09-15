@@ -28,23 +28,25 @@ const ShoppingCart = () => {
   const handleCheckout = async () => {
     try {
       if (totalPrice !== null) {
-        const response = await axios.post(
-          `http://localhost:3001/api/orders/user/${user.id}/checkout`,
-          { total_price: totalPrice, items: cart },
-          { withCredentials: true }
-        );
+        const response = await axios
+          .post(
+            `http://localhost:3001/api/orders/user/${user.id}/checkout`,
+            { total_price: totalPrice, items: cart },
+            { withCredentials: true }
+          )
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Gracias ${user.name}, ¡Tu compra ha sido realizada!`,
+              showConfirmButton: false,
+              timer: 2500,
+              backdrop: "blur",
+            });
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: `Gracias ${user.name}, ¡Tu compra ha sido realizada!`,
-          showConfirmButton: false,
-          timer: 2500,
-          backdrop: "transparent",
-        }).then(() => {
-          localStorage.removeItem("cart");
-          navigate("/");
-        });
+            localStorage.removeItem("cart");
+            navigate("/");
+          });
       }
     } catch (error) {
       console.error("Error al realizar el checkout", error);

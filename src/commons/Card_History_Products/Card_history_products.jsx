@@ -10,9 +10,12 @@ const CardHistory = ({ order }) => {
   return (
     <div className={styles.card}>
       <div className={styles.details}>
-        <h2 className={styles.title}>Order #{order.orderId}</h2>
-        <p className={styles.status}>Status: {order.status}</p>
-        <p className={styles.date}>Purchase Date: {order.purchaseDate}</p>
+        <h2 className={styles.title}>Orden #{order.orderId}</h2>
+        <p className={styles.status}>Estado: {order.status}</p>
+
+        <p className={styles.date}>
+          Fecha de compra: {order.purchaseDate.slice(0, 10)}
+        </p>
 
         <div className={styles.productsContainer}>
           {order.products.map((product) => (
@@ -24,13 +27,13 @@ const CardHistory = ({ order }) => {
               />
               <p className={styles.productName}>{product.name}</p>
               <p className={styles.productPrice}>
-                Price: ${product.price.toFixed(2)}
+                Precio: ${product.price.toFixed(2)}
               </p>
             </div>
           ))}
         </div>
 
-        <p className={styles.price}>Total Price: ${totalPrice.toFixed(2)}</p>
+        <p className={styles.price}>Precio total: ${totalPrice.toFixed(2)}</p>
       </div>
     </div>
   );
