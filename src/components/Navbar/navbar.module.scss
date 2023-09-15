@@ -39,8 +39,7 @@
 }
 
 .logo {
-  display: flex;
-  align-items: center;
+  margin-right: 4rem;
 }
 
 .buttons {
@@ -98,11 +97,12 @@
 
 .navbar {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
   background-color: $text-color;
   color: $tertiary-color;
-  padding: 20px 30px;
+  padding: 20px;
   justify-content: center; /* Centra verticalmente los elementos */
   align-items: center;
   gap: 50px;

@@ -43,27 +43,7 @@ const NavbarComponent = () => {
   return (
     <>
       <div className={styles["nav-header"]}>
-
-
-        <div className={styles["search-bar"]}>
-          <div className={styles["wrap"]}>
-            <div className={styles["search"]}>
-              <input
-                type="text"
-                className={styles["searchTerm"]}
-                placeholder="Buscar..."
-              />
-              <button type="submit" className={styles["searchButton"]}>
-                <i className="fa fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles["empty"]}></div>
-
         <SearchBar />
-        <div className={styles["empty"]}></div>
 
         <div className={styles["logo"]}>
           <img
@@ -110,43 +90,44 @@ const NavbarComponent = () => {
       </div>
 
       <nav className={styles["navbar"]}>
-        <Link to="/">
-          <button className={styles["nav-button"]}>INICIO</button>
-        </Link>
-
-        {location.pathname === "/" ? (
-          <a href="#scroll" className={styles["nav-button"]}>
-            PRODUCTOS
-          </a>
-        ) : (
+        <div>
           <Link to="/">
-            <button className={styles["nav-button"]}>PRODUCTOS</button>
+            <button className={styles["nav-button"]}>INICIO</button>
           </Link>
-        )}
-        {user.role === "ADMIN" ? (
-          <div className={styles["dropdown"]}>
-            <button className={styles["nav-button"]}>
-              OPCIONES DE ADMINISTRADOR
-            </button>
-            <div className={styles["dropdown-content"]}>
-              <Link
-                to="/panel-admin/products"
-                className={styles["text-decoration"]}
-              >
-                <button>PRODUCTOS</button>
-              </Link>
-              <Link
-                to="/panel-admin/categories"
-                className={styles["text-decoration"]}
-              >
-                <button>CATEGORIAS</button>
-              </Link>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
 
+          {location.pathname === "/" ? (
+            <a href="#scroll" className={styles["nav-button"]}>
+              PRODUCTOS
+            </a>
+          ) : (
+            <Link to="/">
+              <button className={styles["nav-button"]}>PRODUCTOS</button>
+            </Link>
+          )}
+          {user.role === "ADMIN" ? (
+            <div className={styles["dropdown"]}>
+              <button className={styles["nav-button"]}>
+                OPCIONES DE ADMINISTRADOR
+              </button>
+              <div className={styles["dropdown-content"]}>
+                <Link
+                  to="/panel-admin/products"
+                  className={styles["text-decoration"]}
+                >
+                  <button>PRODUCTOS</button>
+                </Link>
+                <Link
+                  to="/panel-admin/categories"
+                  className={styles["text-decoration"]}
+                >
+                  <button>CATEGORIAS</button>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
         <div className={styles["icon-wrapper"]} onClick={handleClick}>
           <i className="fa-solid fa-cart-shopping"></i>
         </div>
