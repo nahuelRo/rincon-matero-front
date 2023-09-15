@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../state/userReducer";
 import { useForm } from "react-hook-form";
 import Input from "../../commons/Input/Input";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +33,7 @@ const Login = () => {
         navigate("/");
       })
       .catch(() => {
+        notify();
         setIsLoading(false);
       });
   };
@@ -39,6 +41,8 @@ const Login = () => {
   const handleClick = () => {
     navigate("/");
   };
+
+  const notify = () => toast.error("Credenciales invalidas");
 
   return (
     <section className={styles.container}>
@@ -99,6 +103,7 @@ const Login = () => {
           )}
         </button>
       </form>
+      <Toaster />
     </section>
   );
 };
