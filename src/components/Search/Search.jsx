@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./search.module.scss";
 import axios from "axios";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   const searcher = (e) => {
@@ -21,14 +21,19 @@ const SearchBar = () => {
     performRealTimeSearch(searchTerm);
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/products")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch(() => {});
-  }, []);
+  const handleClick = () => {
+    setSearch("");
+    setFilteredProducts([]);
+  };
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3001/api/products")
+  //     .then((res) => {
+  //       setProducts(res.data);
+  //     })
+  //     .catch(() => {});
+  // }, []);
 
   const performRealTimeSearch = async (searchTerm) => {
     try {
@@ -49,10 +54,10 @@ const SearchBar = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate(`/search?q=${search}`);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   navigate(`/search?q=${search}`);
+  // };
 
   return (
     <div>
@@ -77,7 +82,15 @@ const SearchBar = () => {
           <h2>Resultados de la búsqueda:</h2>
           <ul>
             {filteredProducts.map((product) => (
-              <li key={product.id}>{product.name}</li>
+              <li key={product.id}>
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  onClick={handleClick}
+                  to={`/product/${product.id}`}
+                >
+                  {product.name}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
