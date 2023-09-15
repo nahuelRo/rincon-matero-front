@@ -1,7 +1,9 @@
 # Fronend Rincon Matero
 ---
+![texto_alternativo](./image.png)
 
-This is the back-end of rincon matero system. [Rincon Matero Back-end](https://github.com/nahuelRo/rincon-matero-back) connects here.
+
+This is the front-end of rincon matero system. [Rincon Matero Back-end](https://github.com/nahuelRo/rincon-matero-back) connects here.
 
 ### Technologies
 The project is developed in:
