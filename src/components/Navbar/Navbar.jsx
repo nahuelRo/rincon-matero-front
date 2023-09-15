@@ -43,6 +43,8 @@ const NavbarComponent = () => {
   return (
     <>
       <div className={styles["nav-header"]}>
+
+
         <div className={styles["search-bar"]}>
           <div className={styles["wrap"]}>
             <div className={styles["search"]}>
@@ -59,7 +61,9 @@ const NavbarComponent = () => {
         </div>
 
         <div className={styles["empty"]}></div>
+
         <SearchBar />
+        <div className={styles["empty"]}></div>
 
         <div className={styles["logo"]}>
           <img

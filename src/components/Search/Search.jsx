@@ -1,49 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../commons/Input/Input";
+import styles from "./search.module.scss";
+import axios from "axios";
 
 const SearchBar = () => {
-  const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  const URL = `http://localhost:3001/api/products/search/:query`;
-  const ShowData = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
-    console.log(data);
-    setProducts(data);
-  };
-
   const searcher = (e) => {
-    console.log(e.target);
-    setSearch(e.target.value);
-  };
+    const searchTerm = e.target.value;
+    setSearch(searchTerm);
 
-  const handleSearch = () => {
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-    navigate(`/search-results?search=${search}`);
+    if (searchTerm.trim() === "") {
+      setFilteredProducts([]);
+      return;
+    }
+
+    performRealTimeSearch(searchTerm);
   };
 
   useEffect(() => {
-    ShowData();
+    axios
+      .get("http://localhost:3001/api/products")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch(() => {});
   }, []);
+
+  const performRealTimeSearch = async (searchTerm) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/products/search/${searchTerm}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        const data = response.data;
+        setFilteredProducts(data);
+      } else {
+        console.error("Error al buscar productos");
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search?q=${search}`);
+  };
 
   return (
     <div>
-      <Input
-        value={search}
-        onChange={searcher}
-        type="text"
-        placeholder="Buscar..."
-        className="form-control"
-      />
-      <button onClick={handleSearch}>Buscar</button>
+      <div className={styles["search-bar"]}>
+        <div className={styles["wrap"]}>
+          <div className={styles["search"]}>
+            <input
+              type="text"
+              onChange={searcher}
+              value={search}
+              className={styles["searchTerm"]}
+              placeholder="Buscar..."
+            />
+            <button type="submit" className={styles["searchButton"]}>
+              <i className="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      {filteredProducts.length > 0 && (
+        <div className={styles["search-results"]}>
+          <h2>Resultados de la búsqueda:</h2>
+          <ul>
+            {filteredProducts.map((product) => (
+              <li key={product.id}>{product.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
+
 export default SearchBar;
