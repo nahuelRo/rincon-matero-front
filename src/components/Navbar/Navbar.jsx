@@ -68,16 +68,16 @@ const NavbarComponent = ({ handleGrid }) => {
               </button>
               <div className={styles["dropdown-content"]}>
                 <Link to={"/perfil"} className={styles["text-decoration"]}>
-                  <button>Ver Perfil</button>
+                  <button>VER PERFIL</button>
                 </Link>
 
                 <Link
                   to={`/historyDetails/${user.id}`}
                   className={styles["text-decoration"]}
                 >
-                  <button>Mis compras</button>
+                  <button>MIS COMPRAS</button>
                 </Link>
-                <button onClick={handleLogout}>Cerrar Sesión</button>
+                <button onClick={handleLogout}>CERRAR SESIÓN</button>
               </div>
             </div>
           ) : (
@@ -114,7 +114,7 @@ const NavbarComponent = ({ handleGrid }) => {
               {categories?.map((category, index) => (
                 <Link key={index} className={styles["text-decoration"]}>
                   <button onClick={() => handleGrid(category.id)}>
-                    {category.name}
+                    {category.name.toUpperCase()}
                   </button>
                 </Link>
               ))}
