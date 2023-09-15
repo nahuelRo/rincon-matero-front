@@ -5,12 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Input from "../../commons/Input/Input";
 import toast, { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const [users, setUsers] = useState([]);
+
   const sectionRef = useRef();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/users").then((res) => {
+      setUsers(res.data);
+    });
+  }, []);
 
   const notify = () =>
     toast.success(
@@ -112,6 +121,11 @@ const Register = () => {
             type="email"
             controller={register("email", {
               required: { value: true, message: "Email es requerido" },
+              validate: (value) => {
+                const match = users.some((user) => value === user.email);
+
+                return match ? "Email ya existe" : true;
+              },
               pattern: {
                 value:
                   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
