@@ -4,11 +4,18 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Input from "../../commons/Input/Input";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   const sectionRef = useRef();
   const navigate = useNavigate();
+
+  const notify = () =>
+    toast.success(
+      "¡Usuario creado exitosamente! Redireccionando a Inicio de Sesión"
+    );
 
   const {
     handleSubmit,
@@ -33,9 +40,17 @@ const Register = () => {
         },
         { withCredentials: true }
       )
-      .then(() => {
+      .then((response) => {
         setIsLoading(false);
-        navigate("/login");
+
+        if (response.data.error === "Email already exists") {
+          toast.error("email en uso");
+        } else if (response.data.message === "Successful registration") {
+          notify();
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        }
       })
       .catch(() => {
         setIsLoading(false);
@@ -156,6 +171,7 @@ const Register = () => {
             "CREAR CUENTA"
           )}
         </button>
+        <Toaster />
       </form>
     </section>
   );
