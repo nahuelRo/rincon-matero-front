@@ -102,10 +102,6 @@ const Panel_edit = () => {
                 type="text"
                 controller={register("itemName", {
                   required: { value: true, message: "Nombre es requerido" },
-                  maxLength: {
-                    value: 20,
-                    message: "Debe tener como máximo 20 caracteres",
-                  },
                 })}
                 errors={errors.itemName && errors.itemName.message}
               />
