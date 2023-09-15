@@ -6,6 +6,7 @@ import { setUser } from "../../state/userReducer";
 
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import SearchBar from "../Search/Search";
 
 const NavbarComponent = () => {
   const user = useSelector((state) => state.user);
@@ -42,6 +43,7 @@ const NavbarComponent = () => {
   return (
     <>
       <div className={styles["nav-header"]}>
+
         <div className={styles["search-bar"]}>
           <div className={styles["wrap"]}>
             <div className={styles["search"]}>
@@ -56,6 +58,10 @@ const NavbarComponent = () => {
             </div>
           </div>
         </div>
+
+        <div className={styles["empty"]}></div>
+        <SearchBar />
+
         <div className={styles["logo"]}>
           <img
             src={logoRinconMatero}

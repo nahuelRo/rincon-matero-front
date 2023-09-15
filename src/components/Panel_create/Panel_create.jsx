@@ -28,6 +28,7 @@ const Panel_edit = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     if (name === "products") {
       axios
         .post(
@@ -43,7 +44,14 @@ const Panel_edit = () => {
           },
           { withCredentials: true }
         )
-        .then(() => navigate("/panel-admin/products"));
+        .then(() => {
+          setIsLoading(false);
+          navigate("/panel-admin/products");
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          console.error("Error:", error);
+        });
     } else {
       axios
         .post(
@@ -54,7 +62,13 @@ const Panel_edit = () => {
           },
           { withCredentials: true }
         )
-        .then(() => navigate("/panel-admin/categories"));
+        .then(() => {
+          setIsLoading(false);
+          navigate("/panel-admin/categories");
+        })
+        .catch(() => {
+          setIsLoading(false);
+        });
     }
   };
 
@@ -139,7 +153,7 @@ const Panel_edit = () => {
         <hr className={styles.separator} />
 
         <button type="submit" className={styles.submit}>
-          {isLoading ? "Loading" : "Crear"}
+          {isLoading ? <span className={styles["loader"]}></span> : "Crear"}
         </button>
       </form>
     </section>

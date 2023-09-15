@@ -49,6 +49,7 @@ const Panel_edit = () => {
   };
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     axios
       .put(
         `http://localhost:3001/api/${name}/${id}`,
@@ -62,9 +63,12 @@ const Panel_edit = () => {
         { withCredentials: true }
       )
       .then(() => {
+        setIsLoading(false);
         navigate(`/panel-admin/${name}`);
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleClick = () => {
@@ -157,7 +161,11 @@ const Panel_edit = () => {
         <hr className={styles.separator} />
 
         <button type="submit" className={styles.submit}>
-          {isLoading ? "Loading" : "FINALIZAR EDICIÓN"}
+          {isLoading ? (
+            <span className={styles["loader"]}></span>
+          ) : (
+            "FINALIZAR EDICIÓN"
+          )}
         </button>
       </form>
     </section>

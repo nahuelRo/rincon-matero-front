@@ -22,6 +22,7 @@ import Panel_edit from "./components/Panel_edit/Panel_edit";
 import UserProfileView from "./components/User_profile/User_profile_view";
 
 import Panel_create from "./components/Panel_create/Panel_create";
+import SearchBar from "./components/Search/Search";
 
 import Not_found from "./components/Not_found/Not_found";
 
@@ -57,6 +58,14 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/perfil" element={<UserProfileView />} />
+
+        <Route path="/search" element={<SearchBar />} />
+        {/* Dashboard */}
+
+        <Route path="/panel-admin/:name" element={<Dashboard />} />
+        <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
+        <Route path="/panel-create/:name" element={<Panel_create />} />
+
 
         {user.role === "ADMIN" ? (
           <>
