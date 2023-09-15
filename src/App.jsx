@@ -58,9 +58,6 @@ function App() {
         .then((res) => {
           setProducts(res.data);
         })
-        .then(() => {
-          location.hash = "#" + "scroll";
-        })
         .catch(() => {});
     }
   };
