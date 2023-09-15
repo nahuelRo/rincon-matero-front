@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductDetails from "./components/Product_details/Product_details";
 import fakeData from "./utils/fakeData";
@@ -30,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const product = fakeData[0];
   const user = useSelector((state) => state.user);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
@@ -38,18 +38,43 @@ function App() {
       })
       .then((res) => dispatch(setUser(res.data)))
       .catch(() => {});
-  }, []);
+
+    handleGrid();
+  }, [dispatch]);
+
+  const handleGrid = (id) => {
+    if (id) {
+      axios
+        .get(`http://localhost:3001/api/products/categoryId/${id}`)
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .then(() => {
+          location.hash = "#" + "scroll";
+        });
+    } else {
+      axios
+        .get("http://localhost:3001/api/products")
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .then(() => {
+          location.hash = "#" + "scroll";
+        })
+        .catch(() => {});
+    }
+  };
 
   return (
     <>
-      <NavbarComponent />
+      <NavbarComponent handleGrid={handleGrid} />
       <Routes>
         <Route
           path="/"
           element={
             <>
               <Carrousel />
-              <Grid />
+              <Grid products={products} />
             </>
           }
         />

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./navbar.module.scss";
 import logoRinconMatero from "../../assets/logo rincon matero.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -7,12 +6,21 @@ import { setUser } from "../../state/userReducer";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../Search/Search";
+import { useEffect, useState } from "react";
 
-const NavbarComponent = () => {
+const NavbarComponent = ({ handleGrid }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let location = useLocation();
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/categories`, { withCredentials: true })
+      .then((res) => setCategories(res.data));
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -92,7 +100,12 @@ const NavbarComponent = () => {
       <nav className={styles["navbar"]}>
         <div>
           <Link to="/">
-            <button className={styles["nav-button"]}>INICIO</button>
+            <button 
+              onClick={() => handleGrid()}
+              className={styles["nav-button"]}
+            >
+              INICIO
+            </button>
           </Link>
 
           {location.pathname === "/" ? (
@@ -104,6 +117,20 @@ const NavbarComponent = () => {
               <button className={styles["nav-button"]}>PRODUCTOS</button>
             </Link>
           )}
+
+          <div className={styles["dropdown"]}>
+            <button className={styles["nav-button"]}>CATEGORIAS</button>
+            <div className={styles["dropdown-content"]}>
+              {categories?.map((category, index) => (
+                <Link key={index} className={styles["text-decoration"]}>
+                  <button onClick={() => handleGrid(category.id)}>
+                    {category.name}
+                  </button>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {user.role === "ADMIN" ? (
             <div className={styles["dropdown"]}>
               <button className={styles["nav-button"]}>
