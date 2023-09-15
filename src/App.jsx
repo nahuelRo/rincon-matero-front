@@ -60,12 +60,10 @@ function App() {
         <Route path="/perfil" element={<UserProfileView />} />
 
         <Route path="/search" element={<SearchBar />} />
-        {/* Dashboard */}
 
         <Route path="/panel-admin/:name" element={<Dashboard />} />
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
         <Route path="/panel-create/:name" element={<Panel_create />} />
-
 
         {user.role === "ADMIN" ? (
           <>
@@ -77,14 +75,16 @@ function App() {
           ""
         )}
         <Route path="/historyDetails/:id" element={<HistoryDetails />} />
-        <Route path="*" element={<Navigate to="/notFound" />} />
-        <Route path="/notFound" element={<Not_found />} />
 
         <Route
           path="/product/:id"
           element={<ProductDetails product={product} />}
         />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
+
+        <Route path="*" element={<Navigate to="/notFound" />} />
+
+        <Route path="/notFound" element={<Not_found />} />
       </Routes>
       <PurchaseInfo />
     </>
