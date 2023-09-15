@@ -32,16 +32,13 @@
   border: none;
   border-radius: 4px;
   color: #fff;
-  cursor: pointer;
+  cursor: default !important;
   padding: 8px 12px;
   margin-left: 10px;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: $primary-color;
-  }
-
   i {
+    cursor: default;
     font-size: 18px;
   }
 }
