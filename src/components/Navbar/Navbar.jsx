@@ -43,24 +43,8 @@ const NavbarComponent = () => {
   return (
     <>
       <div className={styles["nav-header"]}>
-
-        <div className={styles["search-bar"]}>
-          <div className={styles["wrap"]}>
-            <div className={styles["search"]}>
-              <input
-                type="text"
-                className={styles["searchTerm"]}
-                placeholder="Buscar..."
-              />
-              <button type="submit" className={styles["searchButton"]}>
-                <i className="fa fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles["empty"]}></div>
         <SearchBar />
+        <div className={styles["empty"]}></div>
 
         <div className={styles["logo"]}>
           <img

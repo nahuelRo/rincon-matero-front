@@ -66,7 +66,6 @@ function App() {
         <Route path="/panel-edit/:name/:id" element={<Panel_edit />} />
         <Route path="/panel-create/:name" element={<Panel_create />} />
 
-
         {user.role === "ADMIN" ? (
           <>
             <Route path="/panel-admin/:name" element={<Dashboard />} />
