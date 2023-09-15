@@ -53,6 +53,8 @@
 .twofields {
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   margin: 0 auto;
 }
@@ -96,4 +98,9 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+label {
+  text-transform: capitalize;
+  font-size: 12px;
 }

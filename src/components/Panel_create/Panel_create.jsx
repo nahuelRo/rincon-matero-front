@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import styles from "../Panel_edit/panel_edit.module.scss";
+import styles from "./panel_create.module.scss";
 import Input from "../../commons/Input/Input";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -100,15 +100,26 @@ const Panel_edit = () => {
               <Input
                 name="nombre"
                 type="text"
-                controller={register("itemName")}
-                errors={errors.name && errors.name.message}
+                controller={register("itemName", {
+                  required: { value: true, message: "Nombre es requerido" },
+                  maxLength: {
+                    value: 20,
+                    message: "Debe tener como máximo 20 caracteres",
+                  },
+                })}
+                errors={errors.itemName && errors.itemName.message}
               />
 
               <Input
                 name="descripción"
                 type="text"
-                controller={register("description")}
-                errors={errors.last_name && errors.last_name.message}
+                controller={register("description", {
+                  required: {
+                    value: true,
+                    message: "Descripción es requerido",
+                  },
+                })}
+                errors={errors.description && errors.description.message}
               />
             </>
           ) : (
@@ -116,34 +127,66 @@ const Panel_edit = () => {
               <Input
                 name="nombre"
                 type="text"
-                controller={register("itemName")}
-                errors={errors.name && errors.name.message}
+                controller={register("itemName", {
+                  required: { value: true, message: "Nombre es requerido" },
+                })}
+                errors={errors.itemName && errors.itemName.message}
               />
               <Input
                 name="descripción"
                 type="text"
-                controller={register("description")}
-                errors={errors.last_name && errors.last_name.message}
+                controller={register("description", {
+                  required: {
+                    value: true,
+                    message: "Descripción es requerido",
+                  },
+                })}
+                errors={errors.description && errors.description.message}
               />
+
               <label htmlFor="category">Categorias:</label>
-              <select {...register("category")}>
+              <select
+                {...register("category", {
+                  required: { value: true, message: "Categoria requerida" },
+                })}
+                defaultValue=""
+                className={errors.category && styles.error}
+              >
+                <option value="" disabled>
+                  Selecciona una categoria
+                </option>
                 {categories?.map((category, index) => (
                   <option key={index} value={category.id}>
                     {category.name}
                   </option>
                 ))}
               </select>
+
+              {errors.category && <span>{errors.category.message}</span>}
+
               <div className={styles.twofields}>
                 <Input
                   name="precio"
                   type="number"
-                  controller={register("price")}
+                  controller={register("price", {
+                    required: {
+                      value: true,
+                      message: "Precio es requerido",
+                    },
+                  })}
+                  errors={errors.price && errors.price.message}
                 />
 
                 <Input
                   name="Stock"
                   type="number"
-                  controller={register("stock")}
+                  controller={register("stock", {
+                    required: {
+                      value: true,
+                      message: "Stock es requerido",
+                    },
+                  })}
+                  errors={errors.stock && errors.stock.message}
                 />
               </div>
             </>

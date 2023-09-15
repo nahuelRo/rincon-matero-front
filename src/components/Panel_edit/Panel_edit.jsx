@@ -97,17 +97,28 @@ const Panel_edit = () => {
               <Input
                 name="nombre"
                 type="text"
-                controller={register("itemName")}
+                controller={register("itemName", {
+                  required: { value: true, message: "Nombre es requerido" },
+                  maxLength: {
+                    value: 20,
+                    message: "Debe tener como máximo 20 caracteres",
+                  },
+                })}
+                errors={errors.itemName && errors.itemName.message}
                 defaultValue={getValues("itemName")}
-                errors={errors.name && errors.name.message}
               />
 
               <Input
                 name="descripción"
                 type="text"
-                controller={register("description")}
+                controller={register("description", {
+                  required: {
+                    value: true,
+                    message: "Descripción es requerido",
+                  },
+                })}
+                errors={errors.description && errors.description.message}
                 defaultValue={getValues("description")}
-                errors={errors.last_name && errors.last_name.message}
               />
             </div>
           </>
@@ -117,17 +128,28 @@ const Panel_edit = () => {
               <Input
                 name="nombre"
                 type="text"
-                controller={register("itemName")}
+                controller={register("itemName", {
+                  required: { value: true, message: "Nombre es requerido" },
+                  maxLength: {
+                    value: 20,
+                    message: "Debe tener como máximo 20 caracteres",
+                  },
+                })}
+                errors={errors.itemName && errors.itemName.message}
                 defaultValue={getValues("itemName")}
-                errors={errors.name && errors.name.message}
               />
 
               <Input
                 name="descripción"
                 type="text"
-                controller={register("description")}
+                controller={register("description", {
+                  required: {
+                    value: true,
+                    message: "Descripción es requerido",
+                  },
+                })}
+                errors={errors.description && errors.description.message}
                 defaultValue={getValues("description")}
-                errors={errors.last_name && errors.last_name.message}
               />
 
               <label htmlFor="category">Categorias:</label>
@@ -143,14 +165,26 @@ const Panel_edit = () => {
                 <Input
                   name="precio"
                   type="number"
-                  controller={register("price")}
+                  controller={register("price", {
+                    required: {
+                      value: true,
+                      message: "Precio es requerido",
+                    },
+                  })}
+                  errors={errors.price && errors.price.message}
                   defaultValue={getValues("price")}
                 />
 
                 <Input
                   name="Stock"
                   type="number"
-                  controller={register("stock")}
+                  controller={register("stock", {
+                    required: {
+                      value: true,
+                      message: "Stock es requerido",
+                    },
+                  })}
+                  errors={errors.stock && errors.stock.message}
                   defaultValue={getValues("stock")}
                 />
               </div>
