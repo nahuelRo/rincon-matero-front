@@ -100,23 +100,13 @@ const NavbarComponent = ({ handleGrid }) => {
       <nav className={styles["navbar"]}>
         <div>
           <Link to="/">
-            <button 
+            <button
               onClick={() => handleGrid()}
               className={styles["nav-button"]}
             >
-              INICIO
+              PRODUCTOS
             </button>
           </Link>
-
-          {location.pathname === "/" ? (
-            <a href="#scroll" className={styles["nav-button"]}>
-              PRODUCTOS
-            </a>
-          ) : (
-            <Link to="/">
-              <button className={styles["nav-button"]}>PRODUCTOS</button>
-            </Link>
-          )}
 
           <div className={styles["dropdown"]}>
             <button className={styles["nav-button"]}>CATEGORIAS</button>
